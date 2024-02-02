@@ -31,11 +31,6 @@ text-align: left;
 padding: 100px;
 }
 
-section h1,
-section p {
-    margin: 5px;
-}
-
 .profile-photo {
     max-width: 300px;
 }
