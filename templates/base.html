@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My Website{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/index" class="nav-link">HOME</a></li>
+                <li><a href="/projects" class="nav-link">PROJECTS</a></li>
+                <li><a href="/contact" class="nav-link">CONTACT</a></li>
+                <li><a href="{{ url_for('static', filename='assets/Travis_Roth.pdf') }}" class="nav-link" download>RESUME</a></li>
+
+            </ul>
+        </nav>
+    </header>
+    <main>
+
+    
+        {% block content %}{% endblock %}
+
+    </main>
+
+</body>
+
+</html>

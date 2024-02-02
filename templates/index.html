@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+    <section>
+        <h1>TRAVIS ROTH</h1>
+
+        <p>I enjoy learning new things. This website is to show you those things.</p>
+        <a href="/projects" class="btn">MY PROJECTS</a>
+    </section>
+    <img src="{{ url_for('static', filename='assets/profile pic.png') }}" alt="Travis Roth's Profile Photo" class="profile-photo">
+
+
+
+
+{% endblock %}
