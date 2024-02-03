@@ -1,6 +1,6 @@
 body {
     font-family: 'Helvetica', sans-serif;
-    overflow: hidden;
+    overflow: auto;
     position: absolute;
     width: 100%;
     height: 100%;
@@ -10,25 +10,32 @@ body {
 }
 
 header {
+    font-family: 'Helvetica', sans-serif;
+    font-weight:bolder;
     background-color: #333;
     color: #fff;
     text-align: center;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
     height: 80px;
 }
 
 main {
     flex: 1;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
   }
 
 section {
-text-align: left;
-padding: 100px;
+text-align: center;
+}
+
+.section-item {
+    padding: 200px
 }
 
 .profile-photo {
@@ -64,14 +71,26 @@ nav a {
 
 .nav-link {
     display: inline-block;
-    padding: 10px 20px;
+    padding: 10px;
     color: #fff;
     text-decoration: none;
     border-radius: 5px;
-    margin-top: 10px;
     border: 2px white;
 }
 
 .nav-link:hover {
     background-color: #4b4a4a; /* Add a subtle background color on hover if desired */
+}
+
+i.fas,
+i.fa-brands {
+    font-size: xx-large;
+    padding:10px;
+    color: #fff;
+}
+
+section.project-carousel {
+    min-height: 300px;
+    margin-top: 100%; /* Adjust this value based on your preference */
+    position: absolute;
 }

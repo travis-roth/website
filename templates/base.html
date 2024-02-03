@@ -6,27 +6,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}My Website{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
+    <script src="https://kit.fontawesome.com/e208d49caf.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
     <header>
-        <nav>
-            <ul>
-                <li><a href="/index" class="nav-link">HOME</a></li>
-                <li><a href="/projects" class="nav-link">PROJECTS</a></li>
-                <li><a href="/contact" class="nav-link">CONTACT</a></li>
-                <li><a href="{{ url_for('static', filename='assets/Travis_Roth.pdf') }}" class="nav-link" download>RESUME</a></li>
-
-            </ul>
-        </nav>
+        <section>
+            <a href="/index" class="nav-link">HOME</a>
+            <a href="/projects" class="nav-link">PROJECTS</a>
+            <a href="/resume" class="nav-link">RESUME</a>
+        </section>
+        
+        <section>
+            <a href="mailto:travisro@outlook.com"><i class="fas fa-envelope"></i></a>
+            <a href="https://linkedin.com/in/travis-roth" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="https://github.com/travis-roth" target="_blank"><i class="fa-brands fa-github"></i></a>
+        </section>
     </header>
+    
     <main>
-
     
         {% block content %}{% endblock %}
 
     </main>
 
+    <script src="{{ url_for('static', filename='scripts/script.js') }}"></script>
 </body>
-
 </html>

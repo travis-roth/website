@@ -13,10 +13,6 @@ def index():
 def projects():
     return render_template('projects.html')
 
-@app.route('/contact')
-def contact():
-    return render_template('contact.html')
-
 @app.route('/weather_home')
 def weather_home():
     return render_template('/weather_proj/weather_home.html')
@@ -24,6 +20,10 @@ def weather_home():
 @app.route('/weather')
 def get_weather():
     city = request.args.get('city')
+
+@app.route('/resume')
+def resume():
+    return render_template('/resume.html')
 
     weather_data = get_current_weather(city)
 
