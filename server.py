@@ -20,6 +20,20 @@ def weather_home():
 @app.route('/weather')
 def get_weather():
     city = request.args.get('city')
+    
+    weather_data = get_current_weather(city)
+
+    #city is not found by api
+    if not weather_data['cod'] == 200:
+        return render_template('/weather_proj/city-not-found.html')
+
+    return render_template(
+        "/weather_proj/weather.html",
+        title=weather_data["name"],
+        status=weather_data["weather"][0]["description"].capitalize(),
+        temp=f"{weather_data['main']['temp']:.1f}",
+        feels_like=f"{weather_data['main']['feels_like']:.1f}"
+    )
 
 @app.route('/resume')
 def resume():
