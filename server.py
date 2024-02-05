@@ -39,19 +39,5 @@ def get_weather():
 def resume():
     return render_template('/resume.html')
 
-    weather_data = get_current_weather(city)
-
-    #city is not found by api
-    if not weather_data['cod'] == 200:
-        return render_template('/weather_proj/city-not-found.html')
-
-    return render_template(
-        "/weather_proj/weather.html",
-        title=weather_data["name"],
-        status=weather_data["weather"][0]["description"].capitalize(),
-        temp=f"{weather_data['main']['temp']:.1f}",
-        feels_like=f"{weather_data['main']['feels_like']:.1f}"
-    )
-
 if __name__ == "__main__":
-    serve(app, host="0.0.0.0", port = 8000)
+    serve(app, host="54.186.213.131", port = 8000)
