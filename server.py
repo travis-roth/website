@@ -1,5 +1,4 @@
-from flask import Flask, render_template, request, abort
-import subprocess
+from flask import Flask, render_template, request
 from weather import get_current_weather
 from waitress import serve
 
@@ -40,17 +39,5 @@ def get_weather():
 def resume():
     return render_template('/resume.html')
 
-@app.route('/webhook', methods=['POST'])
-def webhook():
-    if request.headers.get('X-GitHub-Event') == 'push':
-        try:
-            # Execute a git pull command
-            subprocess.run(['git', 'pull'], cwd='/home/ubuntu/website', check=True)
-            return 'Pull successful', 200
-        except subprocess.CalledProcessError as e:
-            return f'Error during pull: {e}', 500
-    else:
-        abort(400)
-
 if __name__ == "__main__":
-    serve(app, host="0.0.0.0", port = 8000)
+    serve(app, host="54.186.213.131", port = 8000)
