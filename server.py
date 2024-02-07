@@ -1,8 +1,33 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 from weather import get_current_weather
+from models import db, Event
+import os
+from datetime import datetime
 from waitress import serve
 
 app = Flask(__name__)
+
+# Configure SQLAlchemy
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")
+db.init_app(app)
+
+@app.route('/log/event', methods=['POST'])
+def log_event():
+    # Extract event data from the request JSON
+    event_data = request.json.get('eventData')
+    event_type = request.json.get('eventType')
+    timestamp = datetime.utcnow()  # Timestamp for the event (current time)
+
+    # Get user ID from event data (assuming it's included in eventData)
+    user_id = event_data.get('userId') if event_data else None
+
+    # Create a new Event object and save it to the database
+    new_event = Event(event_type=event_type, event_data=event_data, timestamp=timestamp, user_id=user_id)
+    db.session.add(new_event)
+    db.session.commit()
+
+    # Return a JSON response indicating success
+    return jsonify({'message': 'Event logged successfully'}), 200
 
 @app.route('/')
 @app.route('/index')
@@ -40,4 +65,4 @@ def resume():
     return render_template('/resume.html')
 
 if __name__ == "__main__":
-    serve(app, host="54.186.213.131", port = 8000)
+    serve(app, host="0.0.0.0", port = 8000)
