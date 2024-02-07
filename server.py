@@ -31,7 +31,7 @@ def log_event():
     user_id = event_data.get('userId') if event_data else None
 
     # Create a new Event object and save it to the database
-    new_event = Event(event_type=event_type, event_data=event_data, timestamp=timestamp, user_id=user_id)
+    new_event = Event(event_type=event_type, user_id=user_id, timestamp=timestamp)
     db.session.add(new_event)
     db.session.commit()
 
