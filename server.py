@@ -11,6 +11,10 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")
 db.init_app(app)
 
+# Create the tables
+with app.app_context():
+    db.create_all()
+
 @app.route('/log/event', methods=['POST'])
 def log_event():
     # Extract event data from the request JSON
