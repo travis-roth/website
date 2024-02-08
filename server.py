@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, jsonify
 from weather import get_current_weather
 from models import db, Event
 import os
+from sqlalchemy import func
 from datetime import datetime
 from waitress import serve
 import logging
@@ -24,6 +25,11 @@ logger = logging.getLogger(__name__)
 # Create the tables
 with app.app_context():
     db.create_all()
+
+@app.route('/visitor-info')
+def get_visitor_info():
+    distinct_visitors_count = Event.query.distinct(Event.user_id).count()
+    return jsonify({'distinct_visitors_count': distinct_visitors_count})
 
 @app.route('/log/event', methods=['POST'])
 def log_event():
