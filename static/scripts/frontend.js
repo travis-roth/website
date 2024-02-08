@@ -41,8 +41,7 @@ function trackEvent(eventName, eventData) {
         body: JSON.stringify({
             eventType: eventName,
             eventData: {
-                userId: userId, // Include the user ID in the event data
-                // Add additional event data
+                userId: userId,
                 ...eventData
             },
             timestamp: new Date().toISOString()
@@ -66,7 +65,7 @@ document.addEventListener('click', function(event) {
     if (target.tagName === 'BUTTON') {
         // Track the button click event
         trackEvent('button_click', {
-            buttonId: target.id,
+            htmlId: target.id,
             buttonText: target.innerText
         });
     }
@@ -75,7 +74,7 @@ document.addEventListener('click', function(event) {
     if (target.tagName === 'INPUT') {
         // Track the input change event
         trackEvent('input_change', {
-            inputId: target.id,
+            htmlId: target.id,
             inputValue: target.value
         });
     }
@@ -87,6 +86,7 @@ document.addEventListener('click', function(event) {
 window.addEventListener('load', function() {
     // Track the page view event
     trackEvent('page_view', {
-        url: window.location.href
+        url: window.location.href,
+        referrer: document.referrer
     });
 });

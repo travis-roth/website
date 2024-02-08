@@ -6,11 +6,16 @@ from datetime import datetime
 from waitress import serve
 import logging
 
+from flask_migrate import Migrate
+
 app = Flask(__name__)
 
 # Configure SQLAlchemy
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")
 db.init_app(app)
+
+#migrate database structure changes on server start
+migrate = Migrate(app, db)
 
 # Set up logging
 logging.basicConfig(level=logging.DEBUG)
@@ -27,11 +32,16 @@ def log_event():
     event_type = request.json.get('eventType')
     timestamp = datetime.utcnow()  # Timestamp for the event (current time)
 
-    # Get user ID from event data (assuming it's included in eventData)
+    # Get values from event data (assuming it's included in eventData)
     user_id = event_data.get('userId') if event_data else None
+    url = event_data.get('url') if event_data else None
+    referrer = event_data.get('referrer') if event_data else None
+    input_value = event_data.get('inputValue') if event_data else None
+    html_id = event_data.get('htmlId') if event_data else None
+
 
     # Create a new Event object and save it to the database
-    new_event = Event(event_type=event_type, user_id=user_id, timestamp=timestamp)
+    new_event = Event(event_type=event_type, html_id=html_id, input_value=input_value,referrer=referrer, user_id=user_id, url=url,timestamp=timestamp)
     db.session.add(new_event)
     db.session.commit()
 
