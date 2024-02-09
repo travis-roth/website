@@ -68,6 +68,11 @@ def projects():
     logger.debug('Rendering projects page')
     return render_template('projects.html')
 
+@app.route('/ppolicy')
+def policy():
+    logger.debug('Rendering policy page')
+    return render_template('policy.html')
+
 @app.route('/weather_home')
 def weather_home():
     logger.debug('Rendering weather home page')
@@ -100,4 +105,4 @@ def resume():
     return render_template('/resume.html')
 
 if __name__ == "__main__":
-    serve(app, host="0.0.0.0", port=80)
+    serve(app, host="0.0.0.0", port=8000)
