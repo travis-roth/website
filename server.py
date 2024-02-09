@@ -68,7 +68,7 @@ def projects():
     logger.debug('Rendering projects page')
     return render_template('projects.html')
 
-@app.route('/ppolicy')
+@app.route('/policy')
 def policy():
     logger.debug('Rendering policy page')
     return render_template('policy.html')
