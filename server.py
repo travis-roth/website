@@ -28,10 +28,15 @@ with app.app_context():
 
 @app.route('/visitor-info')
 def get_visitor_info():
-    # Get a list of distinct user IDs ordered by the time of their first visit
-    distinct_users = Event.query.distinct(Event.user_id).order_by(Event.timestamp)
-    user_order = {user.user_id: index + 1 for index, user in enumerate(distinct_users)}
-    return jsonify({'user_order': user_order})
+# Query the database to get the distinct count of user IDs
+    distinct_visitors_count = Event.query.with_entities(Event.user_id).distinct().count()
+    # Check if the user has visited before
+    user_id = request.cookies.get('user_id')
+    if user_id:
+        # Get the visitor number based on the order of visits
+        visitor_number = Event.query.filter(Event.user_id == user_id).count()
+        return jsonify({'user_order': visitor_number})
+    return jsonify({'user_order': {distinct_visitors_count}})
 
 @app.route('/log/event', methods=['POST'])
 def log_event():
