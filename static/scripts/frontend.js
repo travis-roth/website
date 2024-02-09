@@ -46,9 +46,9 @@ function trackEvent(eventName, eventData) {
             eventType: eventName,
             eventData: {
                 userId: userId,
-                screenWidth: screenWidth,
-                screenHeight: screenHeight,
-                screenOrientation: screenOrientation,
+                screenWidth: eventData.screenWidth,
+                screenHeight: eventData.screenHeight,
+                screenOrientation: eventData.screenOrientation,
                 ...eventData
             },
             timestamp: new Date().toISOString()
