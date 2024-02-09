@@ -13,8 +13,8 @@ class Event(db.Model):
     html_id = db.Column(db.String(255))
     timestamp = db.Column(db.DateTime, nullable=False)
      # Foreign key column referencing screen_info
-    screen_id = db.Column(db.Integer, db.ForeignKey('screen_info.screen_id'))
-    screen_info = db.relationship('ScreenInfo', backref='events')
+    screen_id = db.Column(db.Integer, db.ForeignKey('screens.screen_id'))
+    screen_info = db.relationship('Screen', backref='events')
     
 class Screen(db.Model):
     __tablename__ = 'screens'
