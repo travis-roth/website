@@ -34,7 +34,7 @@ def get_visitor_info():
     user_id = request.cookies.get('user_id')
     if user_id:
         # Get the visitor number based on the order of visits
-        visitor_number = Event.query.filter(Event.user_id == user_id).count()
+        visitor_number = Event.query.filter(Event.user_id == user_id).distinct(Event.user_id).count()
         return jsonify({'user_order': visitor_number})
     return jsonify({'user_order': {distinct_visitors_count}})
 
