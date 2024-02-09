@@ -53,9 +53,19 @@ def log_event():
 
     # Create a new Event object and save it to the database
     new_event = Event(event_type=event_type, html_id=html_id, input_value=input_value,referrer=referrer, user_id=user_id, url=url,timestamp=timestamp)
-    new_screen = Screen(width=width, height=height, orientation=orientation)
+    existing_screen = Screen.query.filter_by(width=width, height=height, orientation=orientation).first()
+
+    if existing_screen: # Use existing screen record
+        screen_id = existing_screen.screen_id
+    else:               # Create new screen object
+        new_screen = Screen(width=width, height=height, orientation=orientation)
+        db.session.add(new_screen)
+        db.session.flush()  # Flush to obtain the screen_id before committing
+        screen_id = new_screen.screen_id
+
+    new_event.screen_id = screen_id
+
     db.session.add(new_event)
-    db.session.add(new_screen)
     db.session.commit()
 
     # Log the event
