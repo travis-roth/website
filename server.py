@@ -28,8 +28,10 @@ with app.app_context():
 
 @app.route('/visitor-info')
 def get_visitor_info():
-    distinct_visitors_count = Event.query.distinct(Event.user_id).count()
-    return jsonify({'distinct_visitors_count': distinct_visitors_count})
+    # Get a list of distinct user IDs ordered by the time of their first visit
+    distinct_users = Event.query.distinct(Event.user_id).order_by(Event.timestamp)
+    user_order = {user.user_id: index + 1 for index, user in enumerate(distinct_users)}
+    return jsonify({'user_order': user_order})
 
 @app.route('/log/event', methods=['POST'])
 def log_event():
