@@ -1,29 +1,4 @@
-// Function to get a cookie by name
-function getCookie(name) {
-    var cookieName = name + "=";
-    var decodedCookie = decodeURIComponent(document.cookie);
-    var cookieArray = decodedCookie.split(';');
-    for(var i = 0; i < cookieArray.length; i++) {
-        var cookie = cookieArray[i].trim();
-        if (cookie.indexOf(cookieName) === 0) {
-            return cookie.substring(cookieName.length, cookie.length);
-        }
-    }
-    return null;
-}
-
-// Function to set a cookie
-function setCookie(name, value, days) {
-    var expires = "";
-    if (days) {
-        var date = new Date();
-        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-        expires = "; expires=" + date.toUTCString();
-    }
-    document.cookie = name + "=" + (value || "") + expires + "; path=/";
-}
-
-// Function to track custom events
+// Function to track custom events, including screen information
 function trackEvent(eventName, eventData) {
     var userId = getCookie('user_id'); // Get the user ID from the cookie
     if (!userId) {
@@ -31,6 +6,11 @@ function trackEvent(eventName, eventData) {
         userId = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
         setCookie('user_id', userId, 30); // Set the user ID as a cookie (valid for 30 days)
     }
+
+    // Include screen dimensions and orientation in the event data
+    eventData.screenWidth = window.screen.width;
+    eventData.screenHeight = window.screen.height;
+    eventData.screenOrientation = window.screen.orientation.type;
 
     // Send a request to log the custom event
     fetch('/log/event', {

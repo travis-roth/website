@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, jsonify
 from weather import get_current_weather
-from models import db, Event
+from models import db, Event, Screen
 import os
 from sqlalchemy import func
 from datetime import datetime
@@ -45,10 +45,16 @@ def log_event():
     input_value = event_data.get('inputValue') if event_data else None
     html_id = event_data.get('htmlId') if event_data else None
 
+    #get screen data
+    width = event_data.get('screenWidth') if event_data else None
+    height = event_data.get('screenHeight') if event_data else None
+    orientation = event_data.get('screenOrientation') if event_data else None
+
 
     # Create a new Event object and save it to the database
     new_event = Event(event_type=event_type, html_id=html_id, input_value=input_value,referrer=referrer, user_id=user_id, url=url,timestamp=timestamp)
-    db.session.add(new_event)
+    new_screen = Screen(width=width, height=height, orientation=orientation)
+    db.session.add(new_event, new_screen)
     db.session.commit()
 
     # Log the event
