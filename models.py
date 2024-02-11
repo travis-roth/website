@@ -8,13 +8,12 @@ class Event(db.Model):
     event_type = db.Column(db.String(255), nullable=False)
     url = db.Column(db.String(255))
     referrer = db.Column(db.String(255))
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
     input_value = db.Column(db.String(255))
     html_id = db.Column(db.String(255))
     timestamp = db.Column(db.DateTime, nullable=False)
      # Foreign key column referencing screen_info
     screen_id = db.Column(db.Integer, db.ForeignKey('screens.screen_id'))
-    screen_info = db.relationship('Screen', backref='events')
     
 class Screen(db.Model):
     __tablename__ = 'screens'
@@ -35,7 +34,7 @@ class UserSession(db.Model):
     __tablename__ = 'user_sessions'
 
     session_id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
     user = db.relationship('User', backref='sessions')
     remote_addr = db.Column(db.String(255))
     language = db.Column(db.String(255))
