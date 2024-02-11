@@ -28,6 +28,10 @@ def configure_logging(app):
     app.logger.addHandler(handler)
 logger = logging.getLogger(__name__)
 
+configure_logging(app)
+
+app.secret_key = os.getenv("SECRET_KEY")
+
 # Create the tables
 with app.app_context():
     db.create_all()
