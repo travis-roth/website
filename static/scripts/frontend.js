@@ -24,17 +24,21 @@ function setCookie(name, value, days) {
 
 // Function to track custom events, including screen information
 function trackEvent(eventName, eventData) {
-    var userId = getCookie('user_id'); // Get the user ID from the cookie
-    if (!userId) {
+    var cookieId = getCookie('cookie_id'); // Get the user ID from the cookie
+    if (!cookieId) {
         // Generate a new user ID if it doesn't exist
-        userId = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
-        setCookie('user_id', userId, 30); // Set the user ID as a cookie (valid for 30 days)
+        cookieId = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+        setCookie('cookie_id', cookieId, 30); // Set the user ID as a cookie (valid for 30 days)
     }
 
     // Include screen dimensions and orientation in the event data
     eventData.screenWidth = window.screen.width;
     eventData.screenHeight = window.screen.height;
     eventData.screenOrientation = window.screen.orientation.type;
+    eventData.languages = navigator.languages;
+    eventData.userAgent = navigator.userAgent;
+    eventData.timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
 
     // Send a request to log the custom event
     fetch('/log/event', {
@@ -45,10 +49,13 @@ function trackEvent(eventName, eventData) {
         body: JSON.stringify({
             eventType: eventName,
             eventData: {
-                userId: userId,
+                cookieId: cookieId,
                 screenWidth: eventData.screenWidth,
                 screenHeight: eventData.screenHeight,
                 screenOrientation: eventData.screenOrientation,
+                languages: eventData.languages,
+                userAgent: eventData.userAgent,
+                timeZone: eventData.timeZone,
                 ...eventData
             },
             timestamp: new Date().toISOString()

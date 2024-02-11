@@ -1,6 +1,6 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, session
 from weather import get_current_weather
-from models import db, Event, Screen
+from models import db, Event, Screen, User, UserSession
 import os
 from sqlalchemy import func
 from datetime import datetime
@@ -46,7 +46,7 @@ def log_event():
     timestamp = datetime.utcnow()  # Timestamp for the event (current time)
 
     # Get values from event data (assuming it's included in eventData)
-    user_id = event_data.get('userId') if event_data else None
+    cookie_id = event_data.get('cookieId') if event_data else None
     url = event_data.get('url') if event_data else None
     referrer = event_data.get('referrer') if event_data else None
     input_value = event_data.get('inputValue') if event_data else None
@@ -57,11 +57,18 @@ def log_event():
     height = event_data.get('screenHeight') if event_data else None
     orientation = event_data.get('screenOrientation') if event_data else None
 
+    #get session data
+    languages = event_data.get('languages') if event_data else None
+    user_agent = event_data.get('userAgent') if event_data else None
+    if 'session_start_time' not in session:
+        session['session_start_time'] = timestamp
+    session_duration = timestamp - session['session_start_time']
 
     # Create a new Event object and save it to the database
-    new_event = Event(event_type=event_type, html_id=html_id, input_value=input_value,referrer=referrer, user_id=user_id, url=url,timestamp=timestamp)
+    new_event = Event(event_type=event_type, html_id=html_id, input_value=input_value,referrer=referrer, cookie_id=cookie_id, url=url,timestamp=timestamp)
+    new_user = User(cookie_id=cookie_id)
+    new_user_session = UserSession(remote_addr=request.remote_addr, languages=languages, user_agent=user_agent, session_start_time=session['session_start_time'], session_duration=session_duration)
     existing_screen = Screen.query.filter_by(width=width, height=height, orientation=orientation).first()
-
     if existing_screen: # Use existing screen record
         screen_id = existing_screen.screen_id
     else:               # Create new screen object
@@ -73,6 +80,8 @@ def log_event():
     new_event.screen_id = screen_id
 
     db.session.add(new_event)
+    db.session.add(new_user)
+    db.session.add(new_user_session)
     db.session.commit()
 
     # Log the event
