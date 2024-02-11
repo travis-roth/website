@@ -5,7 +5,7 @@ import os
 from sqlalchemy import func
 from datetime import datetime
 from waitress import serve
-import logging
+import my_logging
 
 from flask_migrate import Migrate
 
@@ -19,8 +19,8 @@ db.init_app(app)
 migrate = Migrate(app, db)
 
 # Set up logging
-logging.basicConfig(level=logging.DEBUG)
-logger = logging.getLogger(__name__)
+my_logging.basicConfig(level=my_logging.DEBUG)
+logger = my_logging.getLogger(__name__)
 
 # Create the tables
 with app.app_context():
