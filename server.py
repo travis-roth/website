@@ -5,7 +5,8 @@ import os
 from sqlalchemy import func
 from datetime import datetime
 from waitress import serve
-import my_logging
+import logging
+from logging.handlers import RotatingFileHandler
 
 from flask_migrate import Migrate
 
@@ -18,9 +19,14 @@ db.init_app(app)
 #migrate database structure changes on server start
 migrate = Migrate(app, db)
 
-# Set up logging
-my_logging.basicConfig(level=my_logging.DEBUG)
-logger = my_logging.getLogger(__name__)
+# logging
+def configure_logging(app):
+    # Configure logging
+    logging.basicConfig(level=logging.DEBUG)
+    handler = RotatingFileHandler('app.log', maxBytes=10000, backupCount=1)
+    handler.setLevel(logging.DEBUG)
+    app.logger.addHandler(handler)
+logger = logging.getLogger(__name__)
 
 # Create the tables
 with app.app_context():
