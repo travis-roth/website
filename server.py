@@ -54,7 +54,7 @@ def log_event():
     # Extract event data from the request JSON
     event_data = request.json.get('eventData')
     event_type = request.json.get('eventType')
-    timestamp = datetime.utcnow()  # Timestamp for the event (current time)
+    timestamp = datetime.now(timezone.utc)  # Timestamp for the event (current time)
 
     # Get values from event data (assuming it's included in eventData)
     cookie_id = event_data.get('cookieId') if event_data else None
@@ -94,7 +94,7 @@ def log_event():
     languages = event_data.get('languages') if event_data else None
     user_agent = event_data.get('userAgent') if event_data else None
     if 'session_start_time' not in session:
-        session['session_start_time'] = datetime.utcnow()
+        session['session_start_time'] = datetime.now(timezone.utc)
     session_duration = timestamp - session['session_start_time']
 
     # Create a new Event object and save it to the database
