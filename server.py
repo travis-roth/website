@@ -99,7 +99,7 @@ def log_event():
 
     # Create a new Event object and save it to the database
     new_event = Event(event_type=event_type, html_id=html_id, input_value=input_value,referrer=referrer, user_id=user_id, url=url,timestamp=timestamp)
-    new_user_session = UserSession(remote_addr=request.remote_addr, languages=languages, user_agent=user_agent, session_start_time=session['session_start_time'], session_duration=session_duration)
+    new_user_session = UserSession(remote_addr=request.remote_addr, user_id=user_id,languages=languages, user_agent=user_agent, session_start_time=session['session_start_time'], session_duration=session_duration)
     
     existing_screen = Screen.query.filter_by(width=width, height=height, orientation=orientation).first()
     if existing_screen: # Use existing screen record
