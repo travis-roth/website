@@ -41,12 +41,12 @@ with app.app_context():
 @app.route('/visitor-info')
 def get_visitor_info():
 # Query the database to get the distinct count of user IDs
-    distinct_visitors_count = Event.query.with_entities(Event.user_id).distinct().count()
+    distinct_visitors_count = User.query.with_entities(User.cookie_id).distinct().count()
     # Check if the user has visited before
-    user_id = request.cookies.get('user_id')
-    if user_id:
+    user_cookie = request.cookies.get('cookie_id')
+    if user_cookie:
         # Get the visitor number based on the order of visits
-        visitor_number = Event.query.filter(Event.user_id == user_id).distinct(Event.user_id).count()
+        visitor_number = User.query.filter(User.cookie_id == user_cookie).distinct(User.cookie_id).count()
         return jsonify({'user_order': visitor_number})
     return jsonify({'user_order': {distinct_visitors_count}})
 
