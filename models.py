@@ -38,6 +38,6 @@ class UserSession(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
     user = db.relationship('User', backref='sessions')
     remote_addr = db.Column(db.String(255))
-    language = db.Column(db.String(255))
+    languages = db.Column(db.String(255))
     user_agent = db.Column(db.String(255))
     # Add other session-related fields as needed
