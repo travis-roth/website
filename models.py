@@ -8,7 +8,7 @@ class Event(db.Model):
     event_type = db.Column(db.String(255), nullable=False)
     url = db.Column(db.String(255))
     referrer = db.Column(db.String(255))
-    cookie_id = db.Column(db.Integer, db.ForeignKey('users.cookie_id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
     input_value = db.Column(db.String(255))
     html_id = db.Column(db.String(255))
     timestamp = db.Column(db.DateTime, nullable=False)

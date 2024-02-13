@@ -34,6 +34,7 @@ app.secret_key = os.getenv("SECRET_KEY")
 
 # Create the tables
 with app.app_context():
+    db.drop_all()
     db.create_all()
 
 @app.route('/visitor-info')
