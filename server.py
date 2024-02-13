@@ -67,6 +67,24 @@ def log_event():
     height = event_data.get('screenHeight') if event_data else None
     orientation = event_data.get('screenOrientation') if event_data else None
 
+    # Get or create a user based on the cookie
+    cookie_id = request.cookies.get('user_cookie')
+    if cookie_id:
+        # Check if the cookie is associated with any user
+        user_cookie_mapping = User.query.filter_by(cookie_id=cookie_id).first()
+        if user_cookie_mapping:
+            user = User.query.get(user_cookie_mapping.user_id)
+        else:
+            # Create a new user and associate the cookie with it
+            new_user = User(cookie_id=cookie_id)
+            db.session.add(new_user)
+            user=new_user
+    else:
+        # Create a new user without a cookie ID
+        user = User()
+        db.session.add(user)
+    user_id = user.user_id
+
     #get session data
     languages = event_data.get('languages') if event_data else None
     user_agent = event_data.get('userAgent') if event_data else None
@@ -75,8 +93,7 @@ def log_event():
     session_duration = timestamp - session['session_start_time']
 
     # Create a new Event object and save it to the database
-    new_event = Event(event_type=event_type, html_id=html_id, input_value=input_value,referrer=referrer, cookie_id=cookie_id, url=url,timestamp=timestamp)
-    new_user = User(cookie_id=cookie_id)
+    new_event = Event(event_type=event_type, html_id=html_id, input_value=input_value,referrer=referrer, user_id=user_id, url=url,timestamp=timestamp)
     new_user_session = UserSession(remote_addr=request.remote_addr, languages=languages, user_agent=user_agent, session_start_time=session['session_start_time'], session_duration=session_duration)
     existing_screen = Screen.query.filter_by(width=width, height=height, orientation=orientation).first()
     if existing_screen: # Use existing screen record
@@ -90,7 +107,6 @@ def log_event():
     new_event.screen_id = screen_id
 
     db.session.add(new_event)
-    db.session.add(new_user)
     db.session.add(new_user_session)
     db.session.commit()
 
