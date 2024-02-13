@@ -4,6 +4,7 @@ from models import db, Event, Screen, User, UserSession
 import os
 from sqlalchemy import func
 from datetime import datetime
+import pytz
 from waitress import serve
 import logging
 from logging.handlers import RotatingFileHandler
@@ -79,23 +80,27 @@ def log_event():
             # Create a new user and associate the cookie with it
             new_user = User(cookie_id=cookie_id)
             db.session.add(new_user)
+            db.session.commit()
             user=new_user
     else:
         # Create a new user without a cookie ID
         user = User()
         db.session.add(user)
+        db.session.commit()
+
     user_id = user.user_id
 
     #get session data
     languages = event_data.get('languages') if event_data else None
     user_agent = event_data.get('userAgent') if event_data else None
     if 'session_start_time' not in session:
-        session['session_start_time'] = timestamp
+        session['session_start_time'] = datetime.now(pytz.utc)
     session_duration = timestamp - session['session_start_time']
 
     # Create a new Event object and save it to the database
     new_event = Event(event_type=event_type, html_id=html_id, input_value=input_value,referrer=referrer, user_id=user_id, url=url,timestamp=timestamp)
     new_user_session = UserSession(remote_addr=request.remote_addr, languages=languages, user_agent=user_agent, session_start_time=session['session_start_time'], session_duration=session_duration)
+    
     existing_screen = Screen.query.filter_by(width=width, height=height, orientation=orientation).first()
     if existing_screen: # Use existing screen record
         screen_id = existing_screen.screen_id
