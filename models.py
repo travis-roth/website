@@ -1,4 +1,4 @@
-from flask_sqlalchemy import SQLAlchemy
+from flask_sqlalchemy import SQLAlchemy, relationship
 
 db = SQLAlchemy()
 
@@ -29,6 +29,7 @@ class User(db.Model):
     user_id = db.Column(db.Integer, primary_key=True)
     cookie_id = db.Column(db.String(255), unique=True)
     # Add other user-related fields as needed
+    events = relationship('Event', backref='user')
 
 class UserSession(db.Model):
     __tablename__ = 'user_sessions'
