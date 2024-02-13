@@ -74,22 +74,20 @@ def log_event():
         # Check if the cookie is associated with any user
         user = User.query.filter_by(cookie_id=cookie_id).first()
         if user:
-            pass
+            user_id = user.user_id
         else:
             # Create a new user and associate the cookie with it
             new_user = User(cookie_id=cookie_id)
             db.session.add(new_user)
             db.session.commit()
-            user=new_user.user_id
+            user_id=new_user.user_id
     else:
         # Create a new user without a cookie ID
         user = User()
         db.session.add(user)
         db.session.commit()
         user_id = user.user_id
-
-    user_id = user.user_id
-
+        
     #get session data
     languages = event_data.get('languages') if event_data else None
     user_agent = event_data.get('userAgent') if event_data else None
