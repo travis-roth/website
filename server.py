@@ -74,7 +74,7 @@ def log_event():
         # Check if the cookie is associated with any user
         user = User.query.filter_by(cookie_id=cookie_id).first()
         if user:
-            user = user.user_id
+            pass
         else:
             # Create a new user and associate the cookie with it
             new_user = User(cookie_id=cookie_id)
@@ -168,11 +168,6 @@ def get_weather():
 def resume():
     logger.debug('Rendering resume page')
     return render_template('/resume.html')
-
-@app.route('/sankey-data')
-def sankey_data():
-    data = get_sankey_data()
-    return jsonify(data)
 
 if __name__ == "__main__":
     serve(app, host="0.0.0.0", port=8000)
