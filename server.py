@@ -69,7 +69,7 @@ def log_event():
     orientation = event_data.get('screenOrientation') if event_data else None
 
     # Get or create a user based on the cookie
-    cookie_id = request.cookies.get('user_cookie')
+    cookie_id = request.cookies.get('cookie_id')
     if cookie_id:
         # Check if the cookie is associated with any user
         user = User.query.filter_by(cookie_id=cookie_id).first()
