@@ -94,7 +94,7 @@ def log_event():
     languages = event_data.get('languages') if event_data else None
     user_agent = event_data.get('userAgent') if event_data else None
     if 'session_start_time' not in session:
-        session['session_start_time'] = datetime.now(timezone.utc).replace(tzinfo=None)
+        session['session_start_time'] = datetime.utcnow()
     session_duration = timestamp - session['session_start_time']
 
     # Create a new Event object and save it to the database
