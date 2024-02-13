@@ -7,8 +7,8 @@ from datetime import datetime, timezone
 from waitress import serve
 import logging
 from logging.handlers import RotatingFileHandler
-
 from flask_migrate import Migrate
+from visualizations import get_sankey_data
 
 app = Flask(__name__)
 
@@ -168,6 +168,11 @@ def get_weather():
 def resume():
     logger.debug('Rendering resume page')
     return render_template('/resume.html')
+
+@app.route('/sankey-data')
+def sankey_data():
+    data = get_sankey_data()
+    return jsonify(data)
 
 if __name__ == "__main__":
     serve(app, host="0.0.0.0", port=8000)

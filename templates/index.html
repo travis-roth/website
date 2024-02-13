@@ -31,6 +31,38 @@
         
     
         <a href="/projects" class="btn" id="landing_projects_button">MY PROJECTS</a>
+
+        <div id="sankey-diagram"></div>
+        <script>
+            // Fetch data from Flask backend
+            fetch('/sankey-data')
+                .then(response => response.json())
+                .then(data => {
+                    // Render Sankey diagram using Plotly.js
+                    var trace = {
+                        type: 'sankey',
+                        node: {
+                            pad: 15,
+                            thickness: 20,
+                            line: {
+                                color: 'black',
+                                width: 0.5
+                            },
+                            label: data.nodes
+                        },
+                        link: {
+                            source: data.links.map(link => link.source),
+                            target: data.links.map(link => link.target),
+                            value: data.links.map(link => link.value)
+                        }
+                    };
+                    var layout = {
+                        title: 'User Flow Sankey Diagram'
+                    };
+                    Plotly.newPlot('sankey-diagram', [trace], layout);
+                })
+                .catch(error => console.error('Error fetching Sankey data:', error));
+        </script>
     </section>
 
 
