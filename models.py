@@ -40,4 +40,6 @@ class UserSession(db.Model):
     remote_addr = db.Column(db.String(255))
     languages = db.Column(db.String(255))
     user_agent = db.Column(db.String(255))
+    session_start_time = db.Column(db.DateTime)
+    session_duration = db.Column(db.Interval)
     # Add other session-related fields as needed
