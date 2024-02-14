@@ -102,7 +102,7 @@ def log_event():
             session['session_start_time'] = datetime.now(timezone.utc)
         session_duration = timestamp - session['session_start_time']
 
-        new_session = UserSession(session_id=session.sid, user_id=user_id,ip_address=session['ip_address'], languages=session['languages'],user_agent=session['user_agent'],session_start_time=session['session_start_time'],session_duration=session_duration)
+        new_session = UserSession(session_id=session['session_id'], user_id=user_id,ip_address=session['ip_address'], languages=session['languages'],user_agent=session['user_agent'],session_start_time=session['session_start_time'],session_duration=session_duration)
         db.session.add(new_session)
         db.session.commit()
 
