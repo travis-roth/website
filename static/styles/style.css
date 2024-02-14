@@ -88,8 +88,3 @@ i.fa-brands {
     padding:10px;
     color: #fff;
 }
-
-#plot-container {
-    width: 70%;   /* Specify width of the plot container */
-    height: 80vh;  /* Specify height of the plot container */
-}

@@ -121,7 +121,6 @@ def log_event():
     new_event.screen_id = screen_id
 
     db.session.add(new_event)
-    db.session.add(new_session)
     db.session.commit()
 
     # Log the event
