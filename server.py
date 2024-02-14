@@ -9,6 +9,8 @@ import logging
 from logging.handlers import RotatingFileHandler
 from flask_migrate import Migrate
 from visualizations import generate_plot
+import uuid
+
 
 app = Flask(__name__)
 
@@ -29,6 +31,9 @@ def configure_logging(app):
 logger = logging.getLogger(__name__)
 
 configure_logging(app)
+
+def generate_unique_session_id():
+    return str(uuid.uuid4())
 
 # Create the sqlalchemy tables
 with app.app_context():
@@ -89,7 +94,7 @@ def log_event():
     #get session data
     if 'session_id' not in session:
         # Create a session record if it doesn't exist
-        session['session_id'] = session.sid
+        session['session_id'] = generate_unique_session_id()
         session['ip_address'] = request.remote_addr
         session['user_agent'] = request.user_agent.string
         session['languages'] = request.accept_languages.values
