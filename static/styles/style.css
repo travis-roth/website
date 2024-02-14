@@ -89,8 +89,7 @@ i.fa-brands {
     color: #fff;
 }
 
-section.project-carousel {
-    min-height: 300px;
-    margin-top: 100%; /* Adjust this value based on your preference */
-    position: absolute;
+#plot-container {
+    width: 70%;   /* Specify width of the plot container */
+    height: 80vh;  /* Specify height of the plot container */
 }
