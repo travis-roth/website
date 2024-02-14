@@ -1,28 +1,21 @@
-from models import Event, Screen, User, UserSession
-import plotly.graph_objects as go
-import pandas as pd
+import plotly.graph_objs as go
 
-from flask import jsonify
-from models import Event
-from server import db
+def generate_plot():
+    # Generate some sample data
+    x = [1, 2, 3, 4, 5]
+    y = [10, 20, 30, 40, 50]
 
-# Function to retrieve Sankey diagram data
-def get_sankey_data():
-    # Query event data to get transitions between URLs
-    transitions = db.session.query(Event.referrer, Event.url, db.func.count().label('count')) \
-                    .filter(Event.referrer != '', Event.url != '') \
-                    .group_by(Event.referrer, Event.url) \
-                    .all()
+    # Create a Plotly scatter plot
+    trace = go.Scatter(x=x, y=y, mode='lines+markers', name='Sample Data')
+    data = [trace]
 
-    # Prepare nodes and links for the Sankey diagram
-    nodes = set()
-    links = []
-    for referrer, url, count in transitions:
-        nodes.add(referrer)
-        nodes.add(url)
-        links.append({'source': referrer, 'target': url, 'value': count})
+    # Create layout for the plot
+    layout = go.Layout(title='Sample Plot', xaxis=dict(title='X-axis'), yaxis=dict(title='Y-axis'))
 
-    # Convert nodes set to a sorted list
-    nodes = sorted(list(nodes))
+    # Combine data and layout into a figure
+    fig = go.Figure(data=data, layout=layout)
 
-    return {'nodes': nodes, 'links': links}
+    # Convert the figure to JSON
+    plot_json = fig.to_json()
+
+    return plot_json

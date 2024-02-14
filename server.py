@@ -8,20 +8,20 @@ from waitress import serve
 import logging
 from logging.handlers import RotatingFileHandler
 from flask_migrate import Migrate
-from visualizations import get_sankey_data
+from visualizations import generate_plot
 
 app = Flask(__name__)
 
 # Configure SQLAlchemy
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")
 db.init_app(app)
-
 #migrate database structure changes on server start
 migrate = Migrate(app, db)
+# secret key for signing session cookies
+app.secret_key = os.getenv("SECRET_KEY")
 
 # logging
 def configure_logging(app):
-    # Configure logging
     logging.basicConfig(level=logging.DEBUG)
     handler = RotatingFileHandler('app.log', maxBytes=10000, backupCount=1)
     handler.setLevel(logging.DEBUG)
@@ -30,9 +30,7 @@ logger = logging.getLogger(__name__)
 
 configure_logging(app)
 
-app.secret_key = os.getenv("SECRET_KEY")
-
-# Create the tables
+# Create the sqlalchemy tables
 with app.app_context():
     db.drop_all()
     db.create_all()
@@ -89,15 +87,22 @@ def log_event():
         user_id = user.user_id
         
     #get session data
-    languages = event_data.get('languages') if event_data else None
-    user_agent = event_data.get('userAgent') if event_data else None
-    if 'session_start_time' not in session:
-        session['session_start_time'] = datetime.now(timezone.utc)
-    session_duration = timestamp - session['session_start_time']
+    if 'session_id' not in session:
+        # Create a session record if it doesn't exist
+        session['session_id'] = session.sid
+        session['ip_address'] = request.remote_addr
+        session['user_agent'] = request.user_agent.string
+        session['languages'] = request.accept_languages.values
+        if 'session_start_time' not in session:
+            session['session_start_time'] = datetime.now(timezone.utc)
+        session_duration = timestamp - session['session_start_time']
+
+        new_session = UserSession(session_id=session.sid, user_id=user_id,ip_address=session['ip_address'], languages=session['languages'],user_agent=session['user_agent'],session_start_time=session['session_start_time'],session_duration=session_duration)
+        db.session.add(new_session)
+        db.session.commit()
 
     # Create a new Event object and save it to the database
     new_event = Event(event_type=event_type, html_id=html_id, input_value=input_value,referrer=referrer, user_id=user_id, url=url,timestamp=timestamp)
-    new_user_session = UserSession(remote_addr=request.remote_addr, user_id=user_id,languages=languages, user_agent=user_agent, session_start_time=session['session_start_time'], session_duration=session_duration)
     
     existing_screen = Screen.query.filter_by(width=width, height=height, orientation=orientation).first()
     if existing_screen: # Use existing screen record
@@ -111,7 +116,7 @@ def log_event():
     new_event.screen_id = screen_id
 
     db.session.add(new_event)
-    db.session.add(new_user_session)
+    db.session.add(new_session)
     db.session.commit()
 
     # Log the event
@@ -123,8 +128,11 @@ def log_event():
 @app.route('/')
 @app.route('/index')
 def index():
+
+    plot_json = generate_plot()
+
     logger.debug('Rendering index page')
-    return render_template('index.html')
+    return render_template('index.html', plot_json=plot_json)
 
 @app.route('/projects')
 def projects():

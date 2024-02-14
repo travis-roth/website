@@ -12,7 +12,6 @@ class Event(db.Model):
     input_value = db.Column(db.String(255))
     html_id = db.Column(db.String(255))
     timestamp = db.Column(db.DateTime, nullable=False)
-     # Foreign key column referencing screen_info
     screen_id = db.Column(db.Integer, db.ForeignKey('screens.screen_id'))
     
 class Screen(db.Model):
@@ -28,18 +27,21 @@ class User(db.Model):
 
     user_id = db.Column(db.Integer, primary_key=True)
     cookie_id = db.Column(db.String(255), unique=True)
-    # Add other user-related fields as needed
+
     events = db.relationship('Event', backref='user')
 
 class UserSession(db.Model):
     __tablename__ = 'user_sessions'
 
-    session_id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
+    session_id = db.Column(db.String(100), unique=True, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
     user = db.relationship('User', backref='sessions')
-    remote_addr = db.Column(db.String(255))
+    ip_address = db.Column(db.String(255))
     languages = db.Column(db.String(255))
     user_agent = db.Column(db.String(255))
     session_start_time = db.Column(db.DateTime)
     session_duration = db.Column(db.Interval)
-    # Add other session-related fields as needed
+
+    def __repr__(self):
+        return f"<Session {self.id}>"
