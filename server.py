@@ -97,7 +97,7 @@ def log_event():
         session['session_id'] = generate_unique_session_id()
         session['ip_address'] = request.remote_addr
         session['user_agent'] = request.user_agent.string
-        session['languages'] = list(request.accept_languages.values)
+        session['languages'] = list(request.accept_languages.values())
         if 'session_start_time' not in session:
             session['session_start_time'] = datetime.now(timezone.utc)
         session_duration = timestamp - session['session_start_time']
