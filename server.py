@@ -95,16 +95,16 @@ def log_event():
     if 'session_id' not in session:
         # Create a session record if it doesn't exist
         session['session_id'] = generate_unique_session_id()
-        session['ip_address'] = request.remote_addr
-        session['user_agent'] = request.user_agent.string
-        session['languages'] = list(request.accept_languages.values())
-        if 'session_start_time' not in session:
-            session['session_start_time'] = datetime.now(timezone.utc)
-        session_duration = timestamp - session['session_start_time']
+    session['ip_address'] = request.remote_addr
+    session['user_agent'] = request.user_agent.string
+    session['languages'] = list(request.accept_languages.values())
+    if 'session_start_time' not in session:
+        session['session_start_time'] = datetime.now(timezone.utc)
+    session_duration = timestamp - session['session_start_time']
 
-        new_session = UserSession(session_id=session['session_id'], user_id=user_id,ip_address=session['ip_address'], languages=session['languages'],user_agent=session['user_agent'],session_start_time=session['session_start_time'],session_duration=session_duration)
-        db.session.add(new_session)
-        db.session.commit()
+    new_session = UserSession(session_id=session['session_id'], user_id=user_id,ip_address=session['ip_address'], languages=session['languages'],user_agent=session['user_agent'],session_start_time=session['session_start_time'],session_duration=session_duration)
+    db.session.add(new_session)
+    db.session.commit()
 
     # Create a new Event object and save it to the database
     new_event = Event(event_type=event_type, html_id=html_id, input_value=input_value,referrer=referrer, user_id=user_id, url=url,timestamp=timestamp)

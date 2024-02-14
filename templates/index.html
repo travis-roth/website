@@ -27,12 +27,6 @@
                 })
                 .catch(error => console.error('Error fetching visitor information:', error));
         </script>
-        
-        <div id="plot"></div>
-        <script>
-            var plot_data = {{ plot_json|safe }};
-            Plotly.newPlot('plot', plot_data.data, plot_data.layout);
-        </script>
     
         <a href="/projects" class="btn" id="landing_projects_button">MY PROJECTS</a>
     </section>
