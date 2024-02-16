@@ -194,7 +194,7 @@ def resume():
 def website():
 
     views_per_page = db.session.query(Event.url, func.count(Event.url)).group_by(Event.url).all()
-    page_views_with_titles = [(urlparse(url).path.split('/')[-1], page_views) for url, page_views in views_per_page]
+    page_views_with_titles = [(urlparse(url.decode()).path.split('/')[-1], page_views) for url, page_views in views_per_page]
     page_views_json = [{'page_title': page_title, 'page_views': page_views} for page_title, page_views in page_views_with_titles]
 
     users_per_day = db.session.query(func.date(Event.timestamp).label('date'), func.count(Event.user_id.distinct()).label('users')).group_by(func.date(Event.timestamp)).all()
