@@ -1,7 +1,7 @@
 // static/js/analytics.js
 
 // User locations data passed from Flask backend
-var userLocations = JSON.parse('{{ user_locations | tojson | safe }}');
+var userLocations = { user_locations };
 
 // Initialize Leaflet map
 var map = L.map('map').setView([0, 0], 2);
@@ -13,12 +13,12 @@ userLocations.forEach(function(location) {
 });
 
 // Page views data passed from Flask backend
-var pageViewsData = JSON.parse('{{ page_views | tojson | safe }}');
+var pageViewsData = { page_views };
 var pageTitles = pageViewsData.map(function(entry) { return entry.page_title; });
 var pageViews = pageViewsData.map(function(entry) { return entry.page_views; });
 
 // Daily users data passed from Flask backend
-var dailyUsersData = JSON.parse('{{ daily_users | tojson | safe }}');
+var dailyUsersData = { daily_users };
 var dates = dailyUsersData.map(function(entry) { return entry.date; });
 var dailyUsers = dailyUsersData.map(function(entry) { return entry.users; });
 
