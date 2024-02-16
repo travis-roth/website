@@ -143,10 +143,8 @@ def log_event():
 @app.route('/index')
 def index():
 
-    plot_json = generate_plot()
-
     logger.debug('Rendering index page')
-    return render_template('index.html', plot_json=plot_json)
+    return render_template('index.html')
 
 @app.route('/projects')
 def projects():
@@ -189,30 +187,26 @@ def resume():
     logger.debug('Rendering resume page')
     return render_template('/resume.html')
 
+from flask import render_template
+
 @app.route('/website')
 def website():
 
     views_per_page = db.session.query(Event.url, func.count(Event.url)).group_by(Event.url).all()
-    page_views_json = jsonify([{'page_title': page_title, 'page_views': page_views} for page_title, page_views in views_per_page])
-
     users_per_day = db.session.query(func.date(Event.timestamp).label('date'), func.count(Event.user_id.distinct()).label('users')).group_by(func.date(Event.timestamp)).all()
-    users_per_day_json = jsonify([{'date': str(date), 'users': users} for date, users in users_per_day])
+    sessions = UserSession.query.filter(UserSession.ip_address != None).all()
 
-    sessions = UserSession.query.filter(UserSession.ip_address != None).all()  # Filter out sessions without IP addresses
-
-    # Query geolocation data for each IP address
     user_locations = []
     for session in sessions:
         response = DbIpCity.get(session.ip_address, api_key='free')
         user_locations.append({'session_id': session.id, 'lat': response.latitude, 'lng': response.longitude})
-    user_locations_json = jsonify(user_locations)
 
-    logger.debug("Page Views JSON: %s", page_views_json)
-    logger.debug("Daily Users JSON: %s", users_per_day_json)
-    logger.debug("User Locations JSON: %s", user_locations)
+    logger.debug("Page Views Data: %s", views_per_page)
+    logger.debug("Daily Users Data: %s", users_per_day)
+    logger.debug("User Locations Data: %s", user_locations)
 
-    logger.debug('Rendering website page')
-    return render_template('/website.html', page_views=page_views_json, daily_users=users_per_day_json, user_locations=user_locations_json)
+    return render_template('/website.html', page_views=views_per_page, daily_users=users_per_day, user_locations=user_locations)
+
 
 
 if __name__ == "__main__":
