@@ -207,9 +207,9 @@ def website():
         response = DbIpCity.get(session.ip_address, api_key='free')
         user_locations.append({'session_id': session.id, 'lat': response.latitude, 'lng': response.longitude})
 
-    logger.debug("Page Views JSON:", page_views_json)
-    logger.debug("Daily Users JSON:", users_per_day_json)
-    logger.debug("User Locations JSON:", user_locations)
+    logger.debug("Page Views JSON: %s", page_views_json)
+    logger.debug("Daily Users JSON: %s", users_per_day_json)
+    logger.debug("User Locations JSON: %s", user_locations)
 
     logger.debug('Rendering website page')
     return render_template('/website.html', page_views=page_views_json, daily_users=users_per_day_json, user_locations=user_locations)
