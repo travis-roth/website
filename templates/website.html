@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Weather App{% endblock %}
+
+{% block head}
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<!-- Include Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{{ url_for('static', filename='scripts/analytics.js') }}"></script>
+{% endblock %}
+
+{% block content %}
+<section>
+    <h1>travisroth.info: How it's made</h1>
+    <p1>This website application is hosted on the cloud through AWS. I built the app using Flask, the Python web framework. 
+    I wanted to see how people interacted with my site, so I built a data collection pipeline. As people visit and click around, those interactions are tracked and stored in a PostgreSQL database, also hosted on AWS.
+    Please enjoy the dashboard below, showing user activity on this site.
+    </p1>
+
+    <!-- Div to display map -->
+    <div id="map" style="height: 400px;"></div>
+    <!-- Div to display page views chart -->
+    <canvas id="pageViewsChart" width="400" height="200"></canvas>
+    <!-- Div to display daily users chart -->
+    <canvas id="dailyUsersChart" width="400" height="200"></canvas>
+
+</section>
+{% endblock %}

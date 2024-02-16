@@ -9,7 +9,12 @@ import logging
 from logging.handlers import RotatingFileHandler
 from flask_migrate import Migrate
 from visualizations import generate_plot
+import pandas as pd
 import uuid
+from urllib.parse import urlparse
+from ip2geotools.databases.noncommercial import DbIpCity  # Using ip2geotools library for geolocation
+
+
 
 
 app = Flask(__name__)
@@ -178,6 +183,30 @@ def get_weather():
 def resume():
     logger.debug('Rendering resume page')
     return render_template('/resume.html')
+
+@app.route('/website')
+def website():
+
+    views_per_page = db.session.query(Event.url, func.count(Event.url)).group_by(Event.url).all()
+    page_views_with_titles = [(urlparse(url).path.split('/')[-1], page_views) for url, page_views in views_per_page]
+    page_views_json = [{'page_title': page_title, 'page_views': page_views} for page_title, page_views in page_views_with_titles]
+
+    users_per_day = db.session.query(func.date(Event.timestamp).label('date'), func.count(Event.user_id.distinct()).label('users')).group_by(func.date(Event.timestamp)).all()
+    users_per_day_json = [{'date': str(date), 'users': users} for date, users in users_per_day]
+
+    sessions = UserSession.query.filter(UserSession.ip_address != None).all()  # Filter out sessions without IP addresses
+
+    # Query geolocation data for each IP address
+    user_locations = []
+    for session in sessions:
+        response = DbIpCity.get(session.ip_address, api_key='free')
+        user_locations.append({'session_id': session.id, 'lat': response.latitude, 'lng': response.longitude})
+    # Convert fetched data into a Pandas DataFrame
+
+
+    logger.debug('Rendering website page')
+    return render_template('/website.html', page_views=page_views_json, daily_users=users_per_day_json, user_locations=user_locations)
+
 
 if __name__ == "__main__":
     serve(app, host="0.0.0.0", port=8000)
