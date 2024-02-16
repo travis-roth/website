@@ -8,7 +8,6 @@ from waitress import serve
 import logging
 from logging.handlers import RotatingFileHandler
 from flask_migrate import Migrate
-from visualizations import generate_plot
 import pandas as pd
 import uuid
 from urllib.parse import urlparse
