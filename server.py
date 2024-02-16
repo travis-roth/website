@@ -194,10 +194,10 @@ def resume():
 def website():
 
     views_per_page = db.session.query(Event.url, func.count(Event.url)).group_by(Event.url).all()
-    page_views_json = [{'page_title': page_title, 'page_views': page_views} for page_title, page_views in views_per_page]
+    page_views_json = jsonify([{'page_title': page_title, 'page_views': page_views} for page_title, page_views in views_per_page])
 
     users_per_day = db.session.query(func.date(Event.timestamp).label('date'), func.count(Event.user_id.distinct()).label('users')).group_by(func.date(Event.timestamp)).all()
-    users_per_day_json = [{'date': str(date), 'users': users} for date, users in users_per_day]
+    users_per_day_json = jsonify([{'date': str(date), 'users': users} for date, users in users_per_day])
 
     sessions = UserSession.query.filter(UserSession.ip_address != None).all()  # Filter out sessions without IP addresses
 
@@ -206,13 +206,14 @@ def website():
     for session in sessions:
         response = DbIpCity.get(session.ip_address, api_key='free')
         user_locations.append({'session_id': session.id, 'lat': response.latitude, 'lng': response.longitude})
+    user_locations_json = jsonify(user_locations)
 
     logger.debug("Page Views JSON: %s", page_views_json)
     logger.debug("Daily Users JSON: %s", users_per_day_json)
     logger.debug("User Locations JSON: %s", user_locations)
 
     logger.debug('Rendering website page')
-    return render_template('/website.html', page_views=page_views_json, daily_users=users_per_day_json, user_locations=user_locations)
+    return render_template('/website.html', page_views=page_views_json, daily_users=users_per_day_json, user_locations=user_locations_json)
 
 
 if __name__ == "__main__":
