@@ -205,7 +205,7 @@ def website():
     logger.debug("Daily Users Data: %s", users_per_day)
     logger.debug("User Locations Data: %s", user_locations)
 
-    return render_template('/website.html', page_views=views_per_page, daily_users=users_per_day, user_locations=user_locations)
+    return render_template('/website.html', page_views=jsonify(views_per_page), daily_users=jsonify(users_per_day), user_locations=jsonify(user_locations))
 
 
 
