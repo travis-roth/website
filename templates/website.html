@@ -3,98 +3,10 @@
 {% block title %}Weather App{% endblock %}
 
 {% block head %}
-<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 {% endblock %}
 
 {% block content %}
 <section>
     <h1>travisroth.info: How it's made</h1>
-    <p>This website application is hosted on the cloud through AWS. I built the app using Flask, the Python web framework. 
-    I wanted to see how people interacted with my site, so I built a data collection pipeline. As people visit and click around, those interactions are tracked and stored in a PostgreSQL database, also hosted on AWS.
-    Please enjoy the dashboard below, showing user activity on this site.
-    </p>
-        <h1>Data Dashboard</h1>
-        
-        <!-- Chart for Page Views -->
-        <h2>Page Views</h2>
-        <div id="pageViewsChart"></div>
-    
-        <!-- Chart for Daily Users -->
-        <h2>Daily Users</h2>
-        <div id="dailyUsersChart"></div>
-    
-        <!-- Chart for User Locations -->
-        <h2>User Locations</h2>
-        <div id="userLocationsChart"></div>
-    
-        <!-- Include JavaScript for fetching data and creating charts -->
-        <script>
-            // Function to fetch data from Flask route
-            function fetchDataAndCreateCharts() {
-                fetch('/website')
-                    .then(response => response.json())
-                    .then(data => {
-                        // Process data and create charts
-                        createPageViewsChart(data.page_views);
-                        createDailyUsersChart(data.daily_users);
-                        createUserLocationsChart(data.user_locations);
-                    })
-                    .catch(error => console.error('Error fetching data:', error));
-            }
-    
-            // Function to create Page Views chart
-            function createPageViewsChart(pageViewsData) {
-                const xData = pageViewsData.map(item => item[0]);
-                const yData = pageViewsData.map(item => item[1]);
-    
-                const trace = {
-                    x: xData,
-                    y: yData,
-                    type: 'bar',
-                    marker: {
-                        color: 'rgb(65, 131, 196)'
-                    }
-                };
-    
-                const layout = {
-                    title: 'Page Views',
-                    xaxis: { title: 'Page Title' },
-                    yaxis: { title: 'Views' }
-                };
-    
-                Plotly.newPlot('pageViewsChart', [trace], layout);
-            }
-    
-            // Function to create Daily Users chart
-            function createDailyUsersChart(dailyUsersData) {
-                const dates = dailyUsersData.map(item => item.date);
-                const users = dailyUsersData.map(item => item.users);
-    
-                const trace = {
-                    x: dates,
-                    y: users,
-                    type: 'line',
-                    marker: {
-                        color: 'rgb(65, 131, 196)'
-                    }
-                };
-    
-                const layout = {
-                    title: 'Daily Users',
-                    xaxis: { title: 'Date' },
-                    yaxis: { title: 'Users' }
-                };
-    
-                Plotly.newPlot('dailyUsersChart', [trace], layout);
-            }
-    
-            // Function to create User Locations chart
-            function createUserLocationsChart(userLocationsData) {
-                // Process user locations data and create chart using Plotly or any other library
-            }
-    
-            // Call the fetchDataAndCreateCharts function when the page loads
-            window.onload = fetchDataAndCreateCharts;
-        </script>
-        </section>
+</section>
 {% endblock %}
