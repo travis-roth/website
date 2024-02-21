@@ -1,47 +1,149 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('reset.css');
+
+li,a,button,p {
+    font-family: "Roboto",sans-serif;
+    font-weight: 500px;
+    font-size: 1em;
+    color: #fff;
+    text-decoration: none;
+    margin: 0;
+}
+
+h1 {
+    font-family: "Roboto",sans-serif;
+    font-weight: 500px;
+    font-size: 1.5em;
+    text-decoration: none;
+    margin-block-start: 0;
+    margin-block-end: 0;
+}
+
 body {
-    font-family: 'Helvetica', sans-serif;
-    overflow: auto;
-    position: absolute;
+    overflow-x: hidden;
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
     margin: 0;
+    background-color: #4b4a4a;
 }
 
 header {
-    font-family: 'Helvetica', sans-serif;
-    font-weight:bolder;
-    background-color: #333;
-    color: #fff;
-    text-align: center;
     display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
-    height: 80px;
+    padding: 1.5rem 5rem;
+    background-color: #4b4a4a;
 }
+
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5rem 5rem;
+}
+
 
 main {
     flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: left;
+    color:#fff;
   }
 
 section {
-text-align: center;
+    display: flex;
+    flex-direction: row;
+    text-align: left;
 }
 
-.section-item {
-    padding: 200px
+section.hero {
+    flex: 1;
+    display: flex;
+    height: 80vh;
+    flex-direction: column;
+    overflow: hidden;
+    align-items: flex-start;
 }
 
-.profile-photo {
-    max-width: 300px;
+
+section.projects {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-top: 4.8rem;
+    margin-top: 25rem;
+    margin-left: 4.8rem;
 }
-  
+
+.project1 {
+    display: flex;
+    flex-direction: row;
+}
+
+.project1 a {
+    background-color: #e97911;
+    padding: .3rem;
+    border-radius: .5rem;
+}
+
+#computergif {
+    max-width: 10rem;
+    transform: rotate(10deg);
+}
+
+#project1-1 {
+    margin-left: 10rem;
+    line-height: 1.5em;
+
+}
+
+.hero-name {
+    margin: 0;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    overflow: hidden;
+}
+
+#hero-name {
+    font-family: "Bebas Neue", sans-serif;
+    font-style: normal;
+    font-size: 26vw;
+    margin: 0;
+    text-align: center;
+    white-space: nowrap;
+    overflow-x: visible;
+    color: #fff;
+    transition: color 0.3s;
+
+}
+
+.hero-text {
+    display: flex;
+    flex-direction: row;
+    overflow-wrap: normal;
+    margin-left: 4.8rem;
+    width: 20rem;
+    justify-content: flex-end;
+    position: relative;
+}
+
+#cursor {
+    width: .5rem; /* Adjust the width to make the block thicker */
+    height: 1.5rem;
+    background-color: white;
+    animation: blink 1s infinite;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
 nav ul {
     list-style: none;
     padding: 0;
@@ -66,25 +168,47 @@ nav a {
     color: #fff;
     text-decoration: none;
     border-radius: 5px;
+    border-width: 0;
     margin-top: 10px;
 }
 
 .nav-link {
     display: inline-block;
-    padding: 10px;
+    padding: 10px 20px;
     color: #fff;
     text-decoration: none;
-    border-radius: 5px;
+    border-radius: 30px;
     border: 2px white;
 }
 
 .nav-link:hover {
-    background-color: #4b4a4a; /* Add a subtle background color on hover if desired */
+    color: rgb(233, 121, 17);
+    transition: color 0.3s ease;
 }
+
+
+
+@keyframes blink {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+}
+
 
 i.fas,
 i.fa-brands {
-    font-size: xx-large;
-    padding:10px;
+    font-size: 2rem;
+    padding:.5rem;
     color: #fff;
+    border-radius: .25rem;
 }
+
+i.fas:hover,
+i.fa-brands:hover {
+    color: #e97911;
+    transition: color 0.3s ease;
+}
+

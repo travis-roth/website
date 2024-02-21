@@ -2,18 +2,33 @@
 
 {% block title %}Home{% endblock %}
 
+{% block head %}
+{% endblock %}
 
 {% block content %}
+    <section class="hero">
+        <div class="hero-name">
+            <h1 id="hero-name">TRAVIS ROTH</h1>
+        </div>   
+        <div class="hero-text" id="hero-text">
+            <h1>I'm Travis Roth, a student at UW studying Information Systems and Marketing...</h1>
+            <div id="cursor"></div>
+        </div>
+    </section>
+    <section class="projects">
+        <div class="project1" id="project1">
+            <h1 id="project1-1">...I'm always learning. Most recently, I learned how to build <a href="/website">this website!</a><h1>
+            <img id="computergif" src="https://media.tenor.com/LmKTgSCWvQwAAAAi/this-is-the-end.gif" alt="1990s computer 16bit gif">
+        </div>
 
-    <section>
-        <h1>Welcome!</h1>
-        <p>This website is my favorite project yet! I built the web app using Python Flask and deployed it on AWS EC2.</p>
-        <a href="/website" class="btn" id="website_button">Learn More</a>
+        <div class="project2" id="project2">
+            <h1 id="project2-1">A while ago, I started learning data analytics, and became really interested in machine learning.</a><h1>
+            <img id="computergif" src="https://media.tenor.com/LmKTgSCWvQwAAAAi/this-is-the-end.gif" alt="1990s computer 16bit gif">
+        </div>
+    </section>
     
-    </section>
-    <section>
-        <a href="/projects" class="btn" id="landing_projects_button">MY PROJECTS</a>
-    </section>
+    <script src="{{ url_for('static', filename='scripts/script.js') }}"></script>
+
 
 
 

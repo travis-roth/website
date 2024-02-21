@@ -19,22 +19,21 @@
     {% block head %}{% endblock %}
     <script src="https://cmp.osano.com/16BWMWU3l2LWr4HS2/7c2fd6a3-310f-4480-9396-03e45cec2669/osano.js"></script>
     <script src="https://kit.fontawesome.com/e208d49caf.js" crossorigin="anonymous"></script>
-    <script src="{{ url_for('static', filename='scripts/frontend.js') }}"></script>
+
 </head>
 
 <body>
     <header>
-        <section>
-            <a href="/index" class="nav-link">HOME</a>
-            <a href="/projects" class="nav-link">PROJECTS</a>
-            <a href="/resume" class="nav-link">RESUME</a>
-        </section>
-        
-        <section>
+        <nav>
+            <li><a href="/" class="nav-link">PROJECTS</a></li>
+            <li><a href="/projects" class="nav-link">ABOUT</a></li>
+            <li><a href="/resume" class="nav-link">CONTACT</a></li>
+        </nav>
+        <div class="nav-social-links">
             <a href="mailto:travisro@outlook.com"><i class="fas fa-envelope"></i></a>
             <a href="https://linkedin.com/in/travis-roth" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
             <a href="https://github.com/travis-roth" target="_blank"><i class="fa-brands fa-github"></i></a>
-        </section>
+        </div>
     </header>
     
     <main>
@@ -42,5 +41,9 @@
         {% block content %}{% endblock %}
 
     </main>
+
+    <footer>
+
+    </footer>
 </body>
 </html>

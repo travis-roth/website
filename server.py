@@ -7,8 +7,6 @@ from waitress import serve
 import logging
 from logging.handlers import RotatingFileHandler
 from flask_migrate import Migrate
-import pandas as pd
-import uuid
 from urllib.parse import urlparse
 from ip2geotools.databases.noncommercial import DbIpCity  # Using ip2geotools library for geolocation
 
@@ -30,22 +28,22 @@ configure_logging(app)
 def index():
 
     logger.debug('Rendering index page')
-    return render_template('index.html')
+    return render_template('index.html', current_page='home')
 
 @app.route('/projects')
 def projects():
     logger.debug('Rendering projects page')
-    return render_template('projects.html')
+    return render_template('projects.html', current_page='projects')
 
 @app.route('/policy')
 def policy():
     logger.debug('Rendering policy page')
-    return render_template('policy.html')
+    return render_template('policy.html', current_page='policy')
 
 @app.route('/weather_home')
 def weather_home():
     logger.debug('Rendering weather home page')
-    return render_template('/weather_proj/weather_home.html')
+    return render_template('/weather_proj/weather_home.html', current_page='projects')
 
 @app.route('/weather')
 def get_weather():
@@ -58,20 +56,21 @@ def get_weather():
     #city is not found by api
     if not weather_data['cod'] == 200:
         logger.warning('City not found: %s', city)
-        return render_template('/weather_proj/city-not-found.html')
+        return render_template('/weather_proj/city-not-found.html', current_page='projects')
 
     return render_template(
         "/weather_proj/weather.html",
         title=weather_data["name"],
         status=weather_data["weather"][0]["description"].capitalize(),
         temp=f"{weather_data['main']['temp']:.1f}",
-        feels_like=f"{weather_data['main']['feels_like']:.1f}"
+        feels_like=f"{weather_data['main']['feels_like']:.1f}", 
+        current_page='projects'
     )
 
 @app.route('/resume')
 def resume():
     logger.debug('Rendering resume page')
-    return render_template('/resume.html')
+    return render_template('/resume.html', current_page='resume')
 
 @app.route('/website')
 def website():
