@@ -2,21 +2,30 @@
 
 {% block title %}Get Weather Conditions{% endblock %}
 
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/weather.css') }}">
+{% endblock %}
+
 {% block content %}
 
-<section class="projects">    
-    <body>
+<section class="weather" data-status="{{ status }}">
+    <div class="rain"></div>
+    <div class="sun"></div>
+    <div class="clouds"></div>
+    <div class="weather-details">
         <h1>{{ title }} Weather</h1>
         <p>{{ status }} and {{ temp }} &deg;</p>
         <p>Feels like {{ feels_like }} &deg;</p>
-    
+
         <h1>Get Weather Conditions</h1>
         <form action="/weather"> 
             <input type="text" name="city" id="city" placeholder="Enter a City" />
-            <button type="submit">Submit</button>
+            <button class="btn" type="submit">Submit</button>
         </form>
-    </body>
+    </div>
 </section>
+<script src="{{ url_for('static', filename='scripts/script.js') }}"></script>
+
 {% endblock %}
 
 

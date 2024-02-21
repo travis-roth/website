@@ -25,15 +25,25 @@ function colorTransition(startColor, endColor, percentage) {
 }
 
 document.addEventListener("DOMContentLoaded", function() {
-    var trigger = document.querySelector('.trigger');
-    var imageContainer = document.querySelector('.image-container');
-    var scrollOffset = 2000; // Adjust this value based on how far down you want the image to appear
+    const weatherSection = document.querySelector('.weather');
+    const weatherStatus = weatherSection.dataset.status;
 
-    window.addEventListener('scroll', function() {
-        if (window.scrollY > (trigger.offsetTop + scrollOffset)) {
-            imageContainer.style.display = 'flex';
-        } else {
-            imageContainer.style.display = 'none';
-        }
-    });
+    const rainAnimation = document.querySelector('.rain');
+    const sunAnimation = document.querySelector('.sun');
+    const cloudsAnimation = document.querySelector('.clouds');
+
+    rainAnimation.style.display = 'none';
+    sunAnimation.style.display = 'none';
+    cloudsAnimation.style.display = 'none';
+
+    if (weatherStatus.toLowerCase().includes('rain')) {
+        rainAnimation.style.display = 'block';
+    } else if (weatherStatus.toLowerCase().includes('clear')) {
+        sunAnimation.style.display = 'block';
+    } else if (weatherStatus.toLowerCase().includes('clouds')) {
+        cloudsAnimation.style.display = 'block';
+    }
+
+    // Additional client-side interactions or animations can be added here
 });
+
