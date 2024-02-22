@@ -3,9 +3,42 @@
 {% block title %}Projects{% endblock %}
 
 {% block content %}
-<section>
-        <a href="/weather_home" class = btn>WEATHER APP</a>
-        <a href="/website" class = btn>WEBSITE DASHBOARD</a>
-
+<section class="project-table">
+        <div class="project-row">
+                <p class="project-name">Beating the Bookies with ML</p>
+                <p class="project-description">Predicting NFL game winners with machine learning</p>
+                <p class="project-category">ML&AI, Data Analysis</p>
+                <a href="https://github.com/travis-roth/Beating-the-Bookies-With-ML" target="_blank" class = btn-ppage>Launch <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+        <div class="project-row">
+                <p class="project-name">This website!</p>
+                <p class="project-description">Full stack web development, creating this thing</p>
+                <p class="project-category">Web Development, UX/UI</p>
+                <a href="https://github.com/travis-roth/website" target="_blank" class = btn-ppage>Launch <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+        <div class="project-row">
+                <p class="project-name">DubGrub Mobile Ordering</p>
+                <p class="project-description">Qualitative research study to improve UW's mobile ordering app</p>
+                <p class="project-category">Qualitative Research</p>
+                <a href="/dubgrub" target="_blank" class = btn-ppage>Launch <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+        <div class="project-row">
+                <p class="project-name">How Do You Convince People to Give Blood?</p>
+                <p class="project-description">Research study in collaboration with Bloodworks Northwest</p>
+                <p class="project-category">Qualitative Research, Video Editing</p>
+                <a href="https://www.youtube.com/watch?v=bd89KxZzbfA" target="_blank" class=btn-ppage>Launch <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+        <div class="project-row">
+                <p class="project-name">EDFR Intranet Ownership</p>
+                <p class="project-description">Designing and automating Intranet content creation process</p>
+                <p class="project-category">Process Improvement, Data Analysis</p>
+                <a href="/edfr" class=btn-ppage>Launch <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+        <div class="project-row">
+                <p class="project-name">Weather App</p>
+                <p class="project-description">An app that tells you the weather wherever</p>
+                <p class="project-category">Web Development, UX/UI</p>
+                <a href="/weather_home" class=btn-ppage>Launch <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
 </section>
 {% endblock %}

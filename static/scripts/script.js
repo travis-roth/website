@@ -1,7 +1,7 @@
 window.addEventListener('scroll', function() {
     var header = document.getElementById('hero-name');
     var scrollPosition = window.scrollY;
-    var maxScroll = document.body.clientHeight - window.innerHeight -700;
+    var maxScroll = document.body.clientHeight - window.innerHeight -2200;
     var percentageScrolled = scrollPosition / maxScroll;
 
     // Define the colors you want to transition between
@@ -44,6 +44,12 @@ document.addEventListener("DOMContentLoaded", function() {
         cloudsAnimation.style.display = 'block';
     }
 
-    // Additional client-side interactions or animations can be added here
 });
+
+$(document).ready(function() {
+    $('.burger-menu').click(function() {
+      $('.nav-links').toggleClass('active');
+    });
+  });
+  
 

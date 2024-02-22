@@ -8,6 +8,12 @@
     <title>{% block title %}My Website{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
     <!-- Google tag (gtag.js) -->
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-PV5786MJ');</script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-4GZRVTHLSB"></script>
     <script>
     window.dataLayer = window.dataLayer || [];
@@ -23,18 +29,29 @@
 </head>
 
 <body>
+        <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PV5786MJ"
+        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        <!-- End Google Tag Manager (noscript) -->
     <header>
         <nav>
-            <li><a href="/" class="nav-link">HOME</a></li>
-            <li><a href="/#projects" class="nav-link">PROJECTS</a></li>
-            <li><a href="/#contact" class="nav-link">CONTACT</a></li>
-        </nav>
+            <div class="burger-menu">
+              <div class="burger-icon"></div>
+              <div class="burger-icon"></div>
+            </div>
+            <ul class="nav-links">
+              <li><a href="/" class="nav-link">HOME</a></li>
+              <li><a href="/projects" class="nav-link">PROJECTS</a></li>
+            </ul>
+          </nav>
         <div class="nav-social-links">
             <a href="mailto:travisro@outlook.com"><i class="fas fa-envelope"></i></a>
             <a href="https://linkedin.com/in/travis-roth" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
             <a href="https://github.com/travis-roth" target="_blank"><i class="fa-brands fa-github"></i></a>
         </div>
     </header>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
     
     <main>
     

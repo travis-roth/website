@@ -2,6 +2,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 @import url('reset.css');
 
+:root {
+    --primary-color: #4b4a4a;
+    --secondary-color: #e97911;
+}
+
 li,a,button,p {
     font-family: "Roboto",sans-serif;
     font-weight: 500px;
@@ -81,6 +86,59 @@ section.contact {
     flex-direction: column;
 }
 
+section.project-table {
+    height: 80vh;
+    width: 100vw;
+    align-self: center;
+    text-align: center;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.project-row {
+    width: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: left;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    position: relative;
+    border-bottom: 5px solid #ccc; /* Add a solid border as the divider line */
+}
+
+.project-name {
+    width: 20vw;
+    overflow: hidden;
+    white-space: nowrap;
+    margin-right: 1rem;
+}
+
+.project-category {
+    width: 20vw;
+    overflow: hidden;
+    white-space: nowrap;
+    margin-right: 1rem;
+}
+
+.project-description {
+    width: 30vw;
+    overflow: hidden;
+    white-space: nowrap;
+    margin-right: 1rem;
+}
+
+@media (max-width: 768px) {
+    .project-name {
+        white-space: normal;
+    }
+    .project-description, .project-category{
+        display: none; /* Hide project descriptions on mobile */
+    }
+}
+
 section.weather {
     height: 80vh;
     width: 100vw;
@@ -123,7 +181,7 @@ section.projects a {
 }
 
 .project3 {
-    margin-top: 30rem;
+    margin-top: 40rem;
     margin-left: 15vw;
     position: relative
 }
@@ -157,17 +215,35 @@ section.projects a {
     animation: run-across 8s linear infinite; 
 }
 
-#project1-1 {
-    margin-left: 10rem;
+@keyframes rise {
+    0% {
+        left: 100%;
+        top: 50%;
+    }
+    100% {
+      left: -150%;
+      top: 50%;
+    }
+  }
 
+#weathergif {
+    max-width: 30rem;
+    position: absolute; 
+    top: 5rem; 
+    left: -15%; 
+    animation: rise 10s cubic-bezier(0.2, 0.9, 0.9, 0.2) infinite;
+}
+
+#project1-1 {
+    margin-left: 5vw;
 }
 
 .hero-name {
     margin: 0;
     width: 100%;
     display: flex;
-    justify-content: flex-start; /* Center horizontally */
-    align-items: center; /* Center vertically */
+    justify-content: flex-start;
+    align-items: center;
     overflow: hidden;
 }
 
@@ -181,6 +257,7 @@ section.projects a {
     overflow-x: visible;
     color: #fff;
     transition: color 0.3s;
+    line-height: 100%;
 
 }
 
@@ -189,13 +266,18 @@ section.projects a {
     flex-direction: row;
     overflow-wrap: normal;
     margin-left: 4.8rem;
+    margin-bottom: 1rem;
     width: 20rem;
     justify-content: flex-end;
     position: relative;
 }
 
+.hero-text h1 {
+    line-height: 1.5rem;
+}
+
 #cursor {
-    width: .5rem; /* Adjust the width to make the block thicker */
+    width: .5rem;
     height: 1.5rem;
     background-color: white;
     animation: blink 1s infinite;
@@ -228,19 +310,55 @@ nav a {
     border-radius: .5rem;
 }
 
-.nav-link {
+.btn-ppage {
     display: inline-block;
-    padding: 10px 20px;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 30px;
-    border: 2px white;
+    background-color: #e97911;
+    padding: .3rem;
+    border-radius: .5rem;
+    width: auto;
 }
 
-.nav-link:hover {
-    color: rgb(233, 121, 17);
-    transition: color 0.3s ease;
+.burger-menu {
+    display: none;
+  }
+
+.burger-icon {
+    width: 3rem;
+    height: .25rem;
+    background-color: #fff;
+    margin: 1rem;
 }
+  
+  @media (max-width: 768px) {
+    .burger-menu {
+      display: block;
+      cursor: pointer;
+    }
+  
+    .nav-links {
+      display: none;
+    }
+  
+    .nav-links.active {
+      display: block;
+    }
+  
+    .nav-link {
+      display: block;
+      padding: 10px 20px;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 30px;
+      border: 2px solid white;
+      margin: 10px 0;
+    }
+  
+    .nav-link:hover {
+      color: rgb(233, 121, 17);
+      transition: color 0.3s ease;
+    }
+  }
+  
 
 
 
@@ -266,5 +384,32 @@ i.fas:hover,
 i.fa-brands:hover {
     color: #e97911;
     transition: color 0.3s ease;
+}
+
+i.fa-solid.fa-arrow-right {
+    font-size: 1rem;
+    color: #fff;
+}
+
+a.btn-ppage .fa-solid.fa-arrow-right {
+    transition: transform 0.3s ease; 
+}
+
+a.btn-ppage:hover .fa-solid.fa-arrow-right {
+    transform: rotate(-45deg); 
+}
+
+a.btn-ppage .fa-solid.fa-arrow-right {
+    transform: rotate(0deg); 
+}
+
+a.btn-ppage:not(:hover) .fa-solid.fa-arrow-right {
+    transform: rotate(45deg);
+}
+
+iframe {
+    height: 100vh; /* Set the height as desired */
+    width: 80vw; /* Optionally, set the width to fill the container */
+    border: none; /* Optionally, remove the border */
 }
 

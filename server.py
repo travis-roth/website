@@ -67,10 +67,15 @@ def get_weather():
         current_page='projects'
     )
 
-@app.route('/resume')
-def resume():
-    logger.debug('Rendering resume page')
-    return render_template('/resume.html', current_page='resume')
+@app.route('/dubgrub')
+def dubgrub():
+    logger.debug('Rendering dubgrub page')
+    return render_template('/dubgrub.html', current_page='edfr')
+
+@app.route('/edfr')
+def edfr():
+    logger.debug('Rendering edfr page')
+    return render_template('/edfr.html', current_page='edfr')
 
 @app.route('/website')
 def website():
