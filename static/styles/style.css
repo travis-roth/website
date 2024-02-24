@@ -77,6 +77,23 @@ section.hero {
     align-items: flex-start;
 }
 
+section.project-page {
+    height: auto;
+    width: 100vw;
+    align-self: flex-start;
+    text-align: left;
+    align-items: left;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.project-page h1, .project-page p, .project-page iframe {
+    margin-left: 10vw;
+    margin-right: 10vw;
+    margin-bottom: 1.5vw;
+    line-height: 1.5rem;
+}
+
 section.contact {
 
     align-self: center;
@@ -412,4 +429,3 @@ iframe {
     width: 80vw; /* Optionally, set the width to fill the container */
     border: none; /* Optionally, remove the border */
 }
-

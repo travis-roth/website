@@ -70,7 +70,12 @@ def get_weather():
 @app.route('/dubgrub')
 def dubgrub():
     logger.debug('Rendering dubgrub page')
-    return render_template('/dubgrub.html', current_page='edfr')
+    return render_template('/dubgrub.html', current_page='dubgrub')
+
+@app.route('/bloodworks')
+def bloodworks():
+    logger.debug('Rendering bloodworks page')
+    return render_template('/bloodworks.html', current_page='bloodworks')
 
 @app.route('/edfr')
 def edfr():

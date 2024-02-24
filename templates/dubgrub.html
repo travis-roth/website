@@ -1,9 +1,21 @@
 {% extends "base.html" %}
 
-{% block title %}Projects{% endblock %}
+{% block title %}DubGrub Project{% endblock %}
 
 {% block content %}
-<section class="weather">
+<section class="project-page">
+        <h1>DubGrub Mobile Ordering</h1>
+
+        <p>RESEARCH OBJECTIVE: To uncover some actionable consumer behavior insights regarding
+        mobile ordering preferences among UW students that can be shared with the developers of
+        DubGrub.</p> 
+        <p>For this project, my team acted as marketing researchers using qualitative research
+        methods to explore UW students` attitudes toward mobile ordering apps and successful mobile
+        platforms in general. The results of our research were shared with the UW`s Housing and
+        Food Service (HFS) department to assist them in their development of the DubGrub mobile app.</p>
+
         <iframe src="{{ url_for('static', filename='assets/Dubgrub Mobile Ordering.pdf') }}" width="100%" height="100%"></iframe>
+        <iframe src="{{ url_for('static', filename='assets/MKTG 450 Final Report.pdf') }}" width="100%" height="100%"></iframe>
+
 </section>
 {% endblock %}
