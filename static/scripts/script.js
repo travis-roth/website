@@ -51,5 +51,3 @@ $(document).ready(function() {
       $('.nav-links').toggleClass('active');
     });
   });
-  
-

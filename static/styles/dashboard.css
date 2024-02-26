@@ -1,0 +1,82 @@
+section.dashboard {
+    flex-direction: column;
+}
+
+.dashboard-main-panel {
+    flex-direction: column;
+}
+
+.main-panel-KPI {
+    flex-direction: row;
+}
+
+.main-panel-hero {
+    
+}
+
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    padding: 8px 40px 8px 16px; /* Adjust padding as needed */
+    font-size: 16px; /* Adjust font size as needed */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23000000"><path d="M7 10l5 5 5-5z"/></svg>'); /* Customize arrow icon */
+    background-repeat: no-repeat;
+    background-position: right 8px center; /* Adjust icon position */
+    cursor: pointer;
+}
+
+/* Style the dropdown options */
+select option {
+    padding: 8px 16px; /* Adjust padding as needed */
+    font-size: 16px; /* Adjust font size as needed */
+}
+
+/* Style the selected option */
+select option:checked {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+canvas {
+    max-width: 50%;
+    max-height: 30vw;
+}
+
+.chart-container {
+    position: relative;
+    margin: auto;
+    height: 400px;
+    width: 80%;
+}
+
+#myChart {
+    background-color: #fff;
+    border-radius: 1.5rem;
+}
+
+/* Style the axes labels */
+.chartjs-axis-title {
+    font-size: 14px; /* Set font size */
+    font-weight: bold; /* Set font weight */
+    color: #fff; /* Set font color */
+}
+
+/* Style the legend */
+.chartjs-legend {
+    font-size: 12px; /* Set font size */
+    color: #666; /* Set font color */
+}
+
+/* Style the tooltip */
+.chartjs-tooltip {
+    font-size: 14px; /* Set font size */
+    background-color: rgba(255, 255, 255, 0.9); /* Set background color */
+    border: 1px solid #ccc; /* Set border */
+    border-radius: 5px; /* Set border radius */
+    padding: 5px; /* Set padding */
+    color: #333; /* Set font color */
+}

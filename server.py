@@ -1,14 +1,9 @@
-from flask import Flask, render_template, request, jsonify, session
+from flask import Flask, render_template, request, jsonify
 from weather import get_current_weather
-import os
-from sqlalchemy import func
-from datetime import datetime, timezone
 from waitress import serve
 import logging
 from logging.handlers import RotatingFileHandler
-from flask_migrate import Migrate
-from urllib.parse import urlparse
-from ip2geotools.databases.noncommercial import DbIpCity  # Using ip2geotools library for geolocation
+from google_data import run_custom_report, preprocess_response, get_data, update_data
 
 app = Flask(__name__)
 
@@ -67,6 +62,8 @@ def get_weather():
         current_page='projects'
     )
 
+
+
 @app.route('/dubgrub')
 def dubgrub():
     logger.debug('Rendering dubgrub page')
@@ -85,6 +82,21 @@ def edfr():
 @app.route('/website')
 def website():
     return render_template('/website.html')
+
+@app.route('/dashboard')
+def dashboard():
+    data = get_data()
+    logger.debug("Dashboard data: %s", data)  # Log the data before rendering the template
+    return render_template("dashboard.html", users_by_city_labels=data['users_by_city_labels'],
+                           users_by_city_data=data['users_by_city_data'],
+                           events_by_page_labels=data['events_by_page_labels'],
+                           events_by_page_data=data['events_by_page_data'])
+
+@app.route('/update_data')
+def update():
+    response_data = update_data()
+    logger.debug("Update data response: %s", response_data)  # Log the response from the server
+    return response_data
 
 
 

@@ -1,0 +1,81 @@
+Exception on /dashboard [GET]
+Traceback (most recent call last):
+  File "C:\Users\Travi\OneDrive - UW\Career\Website\.venv\lib\site-packages\flask\app.py", line 1463, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\Travi\OneDrive - UW\Career\Website\.venv\lib\site-packages\flask\app.py", line 872, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\Travi\OneDrive - UW\Career\Website\.venv\lib\site-packages\flask\app.py", line 870, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\Travi\OneDrive - UW\Career\Website\.venv\lib\site-packages\flask\app.py", line 855, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "c:\Users\Travi\OneDrive - UW\Career\Website\server.py", line 88, in dashboard
+    data = get_data()
+  File "c:\Users\Travi\OneDrive - UW\Career\Website\google_data.py", line 94, in get_data
+    if cached_users_by_city_labels is None or cached_users_by_city_data is None \
+NameError: name 'cached_users_by_city_labels' is not defined
+Exception on /dashboard [GET]
+Traceback (most recent call last):
+  File "C:\Users\Travi\OneDrive - UW\Career\Website\.venv\lib\site-packages\flask\app.py", line 1463, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\Travi\OneDrive - UW\Career\Website\.venv\lib\site-packages\flask\app.py", line 872, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\Travi\OneDrive - UW\Career\Website\.venv\lib\site-packages\flask\app.py", line 870, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\Travi\OneDrive - UW\Career\Website\.venv\lib\site-packages\flask\app.py", line 855, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "c:\Users\Travi\OneDrive - UW\Career\Website\server.py", line 88, in dashboard
+    data = get_data()
+  File "c:\Users\Travi\OneDrive - UW\Career\Website\google_data.py", line 104, in get_data
+    data = fetch_data(start_date, start_date)  # Pass start_date as both start_date and end_date
+  File "c:\Users\Travi\OneDrive - UW\Career\Website\google_data.py", line 64, in fetch_data
+    hour_start = datetime.strptime(start_date, "%Y-%m-%d").replace(hour=i, minute=0, second=0)
+  File "C:\Users\Travi\AppData\Local\Programs\Python\Python39\lib\_strptime.py", line 568, in _strptime_datetime
+    tt, fraction, gmtoff_fraction = _strptime(data_string, format)
+  File "C:\Users\Travi\AppData\Local\Programs\Python\Python39\lib\_strptime.py", line 349, in _strptime
+    raise ValueError("time data %r does not match format %r" %
+ValueError: time data 'yesterday' does not match format '%Y-%m-%d'
+Exception on /dashboard [GET]
+Traceback (most recent call last):
+  File "C:\Users\Travi\OneDrive - UW\Career\Website\.venv\lib\site-packages\flask\app.py", line 1463, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\Travi\OneDrive - UW\Career\Website\.venv\lib\site-packages\flask\app.py", line 872, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\Travi\OneDrive - UW\Career\Website\.venv\lib\site-packages\flask\app.py", line 870, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\Travi\OneDrive - UW\Career\Website\.venv\lib\site-packages\flask\app.py", line 855, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "c:\Users\Travi\OneDrive - UW\Career\Website\server.py", line 88, in dashboard
+    data = get_data()
+  File "c:\Users\Travi\OneDrive - UW\Career\Website\google_data.py", line 88, in get_data
+    if cached_users_by_city_labels is None or cached_users_by_city_data is None \
+NameError: name 'cached_users_by_city_labels' is not defined
+Exception on /dashboard [GET]
+Traceback (most recent call last):
+  File "C:\Users\Travi\OneDrive - UW\Career\Website\.venv\lib\site-packages\flask\app.py", line 1463, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\Travi\OneDrive - UW\Career\Website\.venv\lib\site-packages\flask\app.py", line 872, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\Travi\OneDrive - UW\Career\Website\.venv\lib\site-packages\flask\app.py", line 870, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\Travi\OneDrive - UW\Career\Website\.venv\lib\site-packages\flask\app.py", line 855, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "c:\Users\Travi\OneDrive - UW\Career\Website\server.py", line 88, in dashboard
+    data = get_data()
+  File "c:\Users\Travi\OneDrive - UW\Career\Website\google_data.py", line 104, in get_data
+    data = fetch_data(start_date)
+TypeError: fetch_data() missing 1 required positional argument: 'end_date'
+Exception on /dashboard [GET]
+Traceback (most recent call last):
+  File "C:\Users\Travi\OneDrive - UW\Career\Website\.venv\lib\site-packages\flask\app.py", line 1463, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\Travi\OneDrive - UW\Career\Website\.venv\lib\site-packages\flask\app.py", line 872, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\Travi\OneDrive - UW\Career\Website\.venv\lib\site-packages\flask\app.py", line 870, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\Travi\OneDrive - UW\Career\Website\.venv\lib\site-packages\flask\app.py", line 855, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "c:\Users\Travi\OneDrive - UW\Career\Website\server.py", line 88, in dashboard
+    data = get_data()
+  File "c:\Users\Travi\OneDrive - UW\Career\Website\google_data.py", line 104, in get_data
+    data = fetch_data(start_date)
+TypeError: fetch_data() missing 1 required positional argument: 'end_date'

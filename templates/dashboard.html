@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/dashboard.css') }}">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{{ url_for('static', filename='scripts/dashboard.js') }}"></script>
+
+</head>
+{% endblock %}
+
+{% block content %}
+<body>
+    <section class="dashboard">
+        <h1>Admin Dashboard</h1>
+        <canvas id="myChart" width="200" height="100"></canvas>
+        <div id="eventsByPageTable"></div>
+        <canvas id="lineChart" width="400" height="200"></canvas>
+        <div id="sessionsBySourceTable"></div>
+        <form id="startDateForm">
+            <label for="startDate">Select Start Date:</label>
+            <select name="startDate" id="startDate">
+                <option value="yesterday">1 Day</option>
+                <option value="7daysAgo" selected>7 Days</option>
+                <option value="30daysAgo">30 Days</option>
+                <option value="365daysAgo">365 Days</option>
+            </select><br>
+        </form>
+    </section>
+</body>
+{% endblock %}
