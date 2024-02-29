@@ -1,81 +1,13 @@
-Exception on /dashboard [GET]
-Traceback (most recent call last):
-  File "C:\Users\Travi\OneDrive - UW\Career\Website\.venv\lib\site-packages\flask\app.py", line 1463, in wsgi_app
-    response = self.full_dispatch_request()
-  File "C:\Users\Travi\OneDrive - UW\Career\Website\.venv\lib\site-packages\flask\app.py", line 872, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "C:\Users\Travi\OneDrive - UW\Career\Website\.venv\lib\site-packages\flask\app.py", line 870, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "C:\Users\Travi\OneDrive - UW\Career\Website\.venv\lib\site-packages\flask\app.py", line 855, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
-  File "c:\Users\Travi\OneDrive - UW\Career\Website\server.py", line 88, in dashboard
-    data = get_data()
-  File "c:\Users\Travi\OneDrive - UW\Career\Website\google_data.py", line 94, in get_data
-    if cached_users_by_city_labels is None or cached_users_by_city_data is None \
-NameError: name 'cached_users_by_city_labels' is not defined
-Exception on /dashboard [GET]
-Traceback (most recent call last):
-  File "C:\Users\Travi\OneDrive - UW\Career\Website\.venv\lib\site-packages\flask\app.py", line 1463, in wsgi_app
-    response = self.full_dispatch_request()
-  File "C:\Users\Travi\OneDrive - UW\Career\Website\.venv\lib\site-packages\flask\app.py", line 872, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "C:\Users\Travi\OneDrive - UW\Career\Website\.venv\lib\site-packages\flask\app.py", line 870, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "C:\Users\Travi\OneDrive - UW\Career\Website\.venv\lib\site-packages\flask\app.py", line 855, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
-  File "c:\Users\Travi\OneDrive - UW\Career\Website\server.py", line 88, in dashboard
-    data = get_data()
-  File "c:\Users\Travi\OneDrive - UW\Career\Website\google_data.py", line 104, in get_data
-    data = fetch_data(start_date, start_date)  # Pass start_date as both start_date and end_date
-  File "c:\Users\Travi\OneDrive - UW\Career\Website\google_data.py", line 64, in fetch_data
-    hour_start = datetime.strptime(start_date, "%Y-%m-%d").replace(hour=i, minute=0, second=0)
-  File "C:\Users\Travi\AppData\Local\Programs\Python\Python39\lib\_strptime.py", line 568, in _strptime_datetime
-    tt, fraction, gmtoff_fraction = _strptime(data_string, format)
-  File "C:\Users\Travi\AppData\Local\Programs\Python\Python39\lib\_strptime.py", line 349, in _strptime
-    raise ValueError("time data %r does not match format %r" %
-ValueError: time data 'yesterday' does not match format '%Y-%m-%d'
-Exception on /dashboard [GET]
-Traceback (most recent call last):
-  File "C:\Users\Travi\OneDrive - UW\Career\Website\.venv\lib\site-packages\flask\app.py", line 1463, in wsgi_app
-    response = self.full_dispatch_request()
-  File "C:\Users\Travi\OneDrive - UW\Career\Website\.venv\lib\site-packages\flask\app.py", line 872, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "C:\Users\Travi\OneDrive - UW\Career\Website\.venv\lib\site-packages\flask\app.py", line 870, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "C:\Users\Travi\OneDrive - UW\Career\Website\.venv\lib\site-packages\flask\app.py", line 855, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
-  File "c:\Users\Travi\OneDrive - UW\Career\Website\server.py", line 88, in dashboard
-    data = get_data()
-  File "c:\Users\Travi\OneDrive - UW\Career\Website\google_data.py", line 88, in get_data
-    if cached_users_by_city_labels is None or cached_users_by_city_data is None \
-NameError: name 'cached_users_by_city_labels' is not defined
-Exception on /dashboard [GET]
-Traceback (most recent call last):
-  File "C:\Users\Travi\OneDrive - UW\Career\Website\.venv\lib\site-packages\flask\app.py", line 1463, in wsgi_app
-    response = self.full_dispatch_request()
-  File "C:\Users\Travi\OneDrive - UW\Career\Website\.venv\lib\site-packages\flask\app.py", line 872, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "C:\Users\Travi\OneDrive - UW\Career\Website\.venv\lib\site-packages\flask\app.py", line 870, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "C:\Users\Travi\OneDrive - UW\Career\Website\.venv\lib\site-packages\flask\app.py", line 855, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
-  File "c:\Users\Travi\OneDrive - UW\Career\Website\server.py", line 88, in dashboard
-    data = get_data()
-  File "c:\Users\Travi\OneDrive - UW\Career\Website\google_data.py", line 104, in get_data
-    data = fetch_data(start_date)
-TypeError: fetch_data() missing 1 required positional argument: 'end_date'
-Exception on /dashboard [GET]
-Traceback (most recent call last):
-  File "C:\Users\Travi\OneDrive - UW\Career\Website\.venv\lib\site-packages\flask\app.py", line 1463, in wsgi_app
-    response = self.full_dispatch_request()
-  File "C:\Users\Travi\OneDrive - UW\Career\Website\.venv\lib\site-packages\flask\app.py", line 872, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "C:\Users\Travi\OneDrive - UW\Career\Website\.venv\lib\site-packages\flask\app.py", line 870, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "C:\Users\Travi\OneDrive - UW\Career\Website\.venv\lib\site-packages\flask\app.py", line 855, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
-  File "c:\Users\Travi\OneDrive - UW\Career\Website\server.py", line 88, in dashboard
-    data = get_data()
-  File "c:\Users\Travi\OneDrive - UW\Career\Website\google_data.py", line 104, in get_data
-    data = fetch_data(start_date)
-TypeError: fetch_data() missing 1 required positional argument: 'end_date'
+Dashboard data: {'users_by_city_labels': ['Seattle', '(not set)', 'Delano', 'Boydton', 'Columbus', 'Etna', 'Hyderabad', 'Redmond', 'Sparks', 'Warden', 'Warm Springs'], 'users_by_city_data': [6, 3, 2, 1, 1, 1, 1, 1, 1, 1, 1], 'events_by_page_labels': ['Home', 'Projects', 'Admin Dashboard', 'Weather App', 'Get Weather Conditions', 'DubGrub Project', 'City Not Found', 'Website Project'], 'events_by_page_data': [238, 206, 97, 92, 65, 44, 7, 6], 'sessions_by_source_labels': ['(direct)', '(not set)'], 'sessions_by_source_data': [55, 2], 'users_by_day_labels': ['20240221', '20240222', '20240223', '20240224', '20240225', '20240226', '20240227', '20240228'], 'users_by_day_data': [12, 5, 2, 2, 2, 0, 2, 0], 'users_by_hour_labels': ['21', '1', '15', '18', '13', '23', '0', '12', '14', '16', '17', '19', '22', '10', '11', '20', '7', '8'], 'users_by_hour_data': [6, 5, 5, 5, 4, 3, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1]}
+Update data response: <Response 795 bytes [200 OK]>
+Dashboard data: {'users_by_city_labels': ['Seattle', '(not set)', 'Delano', 'Boydton', 'Columbus', 'Etna', 'Hyderabad', 'Redmond', 'Sparks', 'Warden', 'Warm Springs'], 'users_by_city_data': [6, 3, 2, 1, 1, 1, 1, 1, 1, 1, 1], 'events_by_page_labels': ['Home', 'Projects', 'Admin Dashboard', 'Weather App', 'Get Weather Conditions', 'DubGrub Project', 'City Not Found', 'Website Project'], 'events_by_page_data': [238, 206, 97, 92, 65, 44, 7, 6], 'sessions_by_source_labels': ['(direct)', '(not set)'], 'sessions_by_source_data': [55, 2], 'users_by_day_labels': ['20240221', '20240222', '20240223', '20240224', '20240225', '20240226', '20240227', '20240228'], 'users_by_day_data': [12, 5, 2, 2, 2, 0, 2, 0], 'users_by_hour_labels': ['21', '1', '15', '18', '13', '23', '0', '12', '14', '16', '17', '19', '22', '10', '11', '20', '7', '8'], 'users_by_hour_data': [6, 5, 5, 5, 4, 3, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1]}
+Update data response: <Response 795 bytes [200 OK]>
+Dashboard data: {'users_by_city_labels': ['Seattle', '(not set)', 'Delano', 'Boydton', 'Columbus', 'Etna', 'Hyderabad', 'Redmond', 'Sparks', 'Warden', 'Warm Springs'], 'users_by_city_data': [6, 3, 2, 1, 1, 1, 1, 1, 1, 1, 1], 'events_by_page_labels': ['Home', 'Projects', 'Admin Dashboard', 'Weather App', 'Get Weather Conditions', 'DubGrub Project', 'City Not Found', 'Website Project'], 'events_by_page_data': [238, 206, 97, 92, 65, 44, 7, 6], 'sessions_by_source_labels': ['(direct)', '(not set)'], 'sessions_by_source_data': [55, 2], 'users_by_day_labels': ['20240221', '20240222', '20240223', '20240224', '20240225', '20240226', '20240227', '20240228'], 'users_by_day_data': [12, 5, 2, 2, 2, 0, 2, 0], 'users_by_hour_labels': ['21', '1', '15', '18', '13', '23', '0', '12', '14', '16', '17', '19', '22', '10', '11', '20', '7', '8'], 'users_by_hour_data': [6, 5, 5, 5, 4, 3, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1]}
+Update data response: <Response 795 bytes [200 OK]>
+Dashboard data: {'users_by_city_labels': ['Seattle', '(not set)', 'Delano', 'Boydton', 'Columbus', 'Etna', 'Hyderabad', 'Redmond', 'Sparks', 'Warden', 'Warm Springs'], 'users_by_city_data': [6, 3, 2, 1, 1, 1, 1, 1, 1, 1, 1], 'events_by_page_labels': ['Home', 'Projects', 'Admin Dashboard', 'Weather App', 'Get Weather Conditions', 'DubGrub Project', 'City Not Found', 'Website Project'], 'events_by_page_data': [238, 206, 97, 92, 65, 44, 7, 6], 'sessions_by_source_labels': ['(direct)', '(not set)'], 'sessions_by_source_data': [55, 2], 'users_by_day_labels': ['20240221', '20240222', '20240223', '20240224', '20240225', '20240226', '20240227', '20240228'], 'users_by_day_data': [12, 5, 2, 2, 2, 0, 2, 0], 'users_by_hour_labels': ['21', '1', '15', '18', '13', '23', '0', '12', '14', '16', '17', '19', '22', '10', '11', '20', '7', '8'], 'users_by_hour_data': [6, 5, 5, 5, 4, 3, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1]}
+Update data response: <Response 795 bytes [200 OK]>
+Dashboard data: {'users_by_city_labels': ['Seattle', '(not set)', 'Delano', 'Boydton', 'Columbus', 'Etna', 'Hyderabad', 'Redmond', 'Sparks', 'Warden', 'Warm Springs'], 'users_by_city_data': [6, 3, 2, 1, 1, 1, 1, 1, 1, 1, 1], 'events_by_page_labels': ['Home', 'Projects', 'Admin Dashboard', 'Weather App', 'Get Weather Conditions', 'DubGrub Project', 'City Not Found', 'Website Project'], 'events_by_page_data': [238, 206, 97, 92, 65, 44, 7, 6], 'sessions_by_source_labels': ['(direct)', '(not set)'], 'sessions_by_source_data': [55, 2], 'users_by_day_labels': ['20240221', '20240222', '20240223', '20240224', '20240225', '20240226', '20240227', '20240228'], 'users_by_day_data': [12, 5, 2, 2, 2, 0, 2, 0], 'users_by_hour_labels': ['21', '1', '15', '18', '13', '23', '0', '12', '14', '16', '17', '19', '22', '10', '11', '20', '7', '8'], 'users_by_hour_data': [6, 5, 5, 5, 4, 3, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1]}
+Update data response: <Response 795 bytes [200 OK]>
+Update data response: <Response 1094 bytes [200 OK]>
+Dashboard data: {'users_by_city_labels': ['Seattle', '(not set)', 'Delano', 'Boydton', 'Columbus', 'Etna', 'Hyderabad', 'Redmond', 'Sparks', 'Warden', 'Warm Springs'], 'users_by_city_data': [6, 3, 2, 1, 1, 1, 1, 1, 1, 1, 1], 'events_by_page_labels': ['Home', 'Projects', 'Admin Dashboard', 'Weather App', 'Get Weather Conditions', 'DubGrub Project', 'City Not Found', 'Website Project'], 'events_by_page_data': [238, 206, 97, 92, 65, 44, 7, 6], 'sessions_by_source_labels': ['(direct)', '(not set)'], 'sessions_by_source_data': [55, 2], 'users_by_day_labels': ['20240221', '20240222', '20240223', '20240224', '20240225', '20240226', '20240227', '20240228'], 'users_by_day_data': [12, 5, 2, 2, 2, 0, 2, 0], 'users_by_hour_labels': ['21', '1', '15', '18', '13', '23', '0', '12', '14', '16', '17', '19', '22', '10', '11', '20', '7', '8'], 'users_by_hour_data': [6, 5, 5, 5, 4, 3, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1]}
+Update data response: <Response 795 bytes [200 OK]>

@@ -86,17 +86,25 @@ def website():
 @app.route('/dashboard')
 def dashboard():
     data = get_data()
-    logger.debug("Dashboard data: %s", data)  # Log the data before rendering the template
-    return render_template("dashboard.html", users_by_city_labels=data['users_by_city_labels'],
+    app.logger.debug("Dashboard data: %s", data)
+    return render_template("dashboard.html", 
+                           users_by_city_labels=data['users_by_city_labels'],
                            users_by_city_data=data['users_by_city_data'],
                            events_by_page_labels=data['events_by_page_labels'],
-                           events_by_page_data=data['events_by_page_data'])
+                           events_by_page_data=data['events_by_page_data'],
+                           sessions_by_source_labels=data['sessions_by_source_labels'],
+                           sessions_by_source_data=data['sessions_by_source_data'],
+                           users_by_day_labels=data['users_by_day_labels'],
+                           users_by_day_data=data['users_by_day_data'],
+                           users_by_hour_labels=data['users_by_hour_labels'],
+                           users_by_hour_data=data['users_by_hour_data'])
 
 @app.route('/update_data')
 def update():
     response_data = update_data()
-    logger.debug("Update data response: %s", response_data)  # Log the response from the server
+    app.logger.debug("Update data response: %s", response_data)
     return response_data
+
 
 
 

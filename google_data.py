@@ -1,16 +1,12 @@
 
 from flask import request, jsonify
-from google.analytics.data_v1beta import BetaAnalyticsDataClient
-from google.analytics.data_v1beta.types import (
-    DateRange,
-    Dimension,
-    Metric,
-    MetricType,
-    RunReportRequest,
-)
 from dotenv import load_dotenv
 import requests
 import os
+from datetime import datetime, timedelta
+from google.analytics.data_v1beta import BetaAnalyticsDataClient
+from google.analytics.data_v1beta.types import (DateRange,Dimension,Metric,MetricType,RunReportRequest,
+)
 
 load_dotenv()
 
@@ -31,7 +27,7 @@ cached_users_by_time_data = None
 
 
 def fetch_data(start_date, end_date="today"):
-    global cached_users_by_city_labels, cached_users_by_city_data, cached_events_by_page_labels, cached_events_by_page_data, cached_sessions_by_source_labels, cached_sessions_by_source_data
+    global cached_users_by_city_labels, cached_users_by_city_data, cached_events_by_page_labels, cached_events_by_page_data, cached_sessions_by_source_labels, cached_sessions_by_source_data, cached_users_by_day_labels, cached_users_by_day_data, cached_users_by_hour_labels, cached_users_by_hour_data
 
     # Fetch data from Google Analytics API
     users_by_city = run_custom_report(
@@ -57,7 +53,7 @@ def fetch_data(start_date, end_date="today"):
 
     users_by_day = run_custom_report(
         metrics=["activeUsers"],
-        dimensions=["day"],
+        dimensions=["date"],
         start_date=start_date,
         end_date=end_date
     )    
@@ -76,6 +72,8 @@ def fetch_data(start_date, end_date="today"):
     users_by_day_labels, users_by_day_data = preprocess_response(users_by_day)
     users_by_hour_labels, users_by_hour_data = preprocess_response(users_by_hour)
 
+    # Fill in missing dates with 0 users and order arrays by date
+    filled_dates, filled_data = fill_and_order_dates(users_by_day_labels, users_by_day_data, start_date, end_date)
 
     return {
         'users_by_city_labels': users_by_city_labels,
@@ -84,16 +82,79 @@ def fetch_data(start_date, end_date="today"):
         'events_by_page_data': events_by_page_data,
         'sessions_by_source_labels': sessions_by_source_labels,
         'sessions_by_source_data': sessions_by_source_data,
-        'users_by_day_labels': users_by_day_labels,
-        'users_by_day_data': users_by_day_data,
+        'users_by_day_labels': filled_dates,
+        'users_by_day_data': filled_data,
         'users_by_hour_labels': users_by_hour_labels,
         'users_by_hour_data': users_by_hour_data
     }
+
+def fill_and_order_dates(labels, data, start_date, end_date):
+    """
+    Fill in missing dates between start_date and end_date with 0 values and order arrays by date.
+    
+    Args:
+        labels (list): List of dates in YYYYMMDD format.
+        data (list): Corresponding data points.
+        start_date (str): Start date in YYYYMMDD format.
+        end_date (str): End date in YYYYMMDD format.
+    
+    Returns:
+        Tuple containing filled and ordered dates and corresponding filled and ordered data points.
+    """
+    filled_dates = []
+    filled_data = []
+
+    start_date_as_datetime = parse_date_term(start_date)
+    end_date_as_datetime = parse_date_term(end_date)
+    
+    current_date = datetime.strptime(start_date_as_datetime, "%Y-%m-%d")
+    end_date = datetime.strptime(end_date_as_datetime, "%Y-%m-%d")
+    
+    # Fill in missing dates with 0 values
+    while current_date <= end_date:
+        date_str = current_date.strftime("%Y%m%d")
+        filled_dates.append(date_str)
+        
+        if date_str in labels:
+            index = labels.index(date_str)
+            filled_data.append(data[index])
+        else:
+            filled_data.append(0)
+        
+        current_date += timedelta(days=1)
+    
+    return filled_dates, filled_data
+
+def parse_date_term(date_term):
+    """
+    Parses date terms like "yesterday", "today", "30daysAgo" into datetime format.
+
+    Args:
+        date_term (str): Date term string.
+
+    Returns:
+        str: Date string in "%Y-%m-%d" format.
+    """
+    if date_term == "yesterday":
+        return (datetime.today() - timedelta(days=1)).strftime("%Y-%m-%d")
+    elif date_term == "today":
+        return datetime.today().strftime("%Y-%m-%d")
+    elif date_term.endswith("daysAgo"):
+        days_ago = int(date_term[:-7])
+        return (datetime.today() - timedelta(days=days_ago)).strftime("%Y-%m-%d")
+    else:
+        # Default to today's date
+        return datetime.today().strftime("%Y-%m-%d")
 
 def get_data():
     global cached_users_by_city_labels, cached_users_by_city_data, cached_events_by_page_labels, cached_events_by_page_data, cached_sessions_by_source_labels, cached_sessions_by_source_data, cached_users_by_day_labels, cached_users_by_day_data, cached_users_by_hour_labels, cached_users_by_hour_data
 
     start_date = request.args.get('startDate')
+
+    if start_date is None:
+        # Set a default start date, e.g., 7 days ago from today
+        default_start_date = "7daysAgo"
+        start_date = default_start_date
 
     if cached_users_by_city_labels is None or cached_users_by_city_data is None \
             or cached_events_by_page_labels is None or cached_events_by_page_data is None \

@@ -9,7 +9,7 @@ $(document).ready(function() {
         if (timeChart) {
             timeChart.destroy();
         }
-
+    
         var ctx = document.getElementById('myChart').getContext('2d');
         myChart = new Chart(ctx, {
             type: 'bar',
@@ -18,8 +18,6 @@ $(document).ready(function() {
                 datasets: [{
                     label: 'Active Users by City',
                     data: usersByCityData,
-                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                    borderColor: 'rgba(54, 162, 235, 1)',
                     borderWidth: 1
                 }]
             },
@@ -41,7 +39,7 @@ $(document).ready(function() {
                 }
             }
         });
-
+    
         // Render table for events by page
         var tableHTML = '<table><thead><tr><th>Page</th><th>Views</th></tr></thead><tbody>';
         for (var i = 0; i < eventsByPageLabels.length; i++) {
@@ -49,7 +47,7 @@ $(document).ready(function() {
         }
         tableHTML += '</tbody></table>';
         $('#eventsByPageTable').html(tableHTML);
-
+    
         // Render table for sessions by source
         var sessionsTableHTML = '<table><thead><tr><th>Source</th><th>Sessions</th></tr></thead><tbody>';
         for (var i = 0; i < sessionsBySourceLabels.length; i++) {
@@ -57,7 +55,7 @@ $(document).ready(function() {
         }
         sessionsTableHTML += '</tbody></table>';
         $('#sessionsBySourceTable').html(sessionsTableHTML);
-
+    
         // Render line chart for users per day
         var ctxLine = document.getElementById('lineChart').getContext('2d');
         timeChart = new Chart(ctxLine, {
@@ -67,8 +65,6 @@ $(document).ready(function() {
                 datasets: [{
                     label: 'Users per Day',
                     data: usersByDayData,
-                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                    borderColor: 'rgba(255, 99, 132, 1)',
                     borderWidth: 1
                 }]
             },
@@ -90,8 +86,8 @@ $(document).ready(function() {
                 }
             }
         });
-    }
 
+    }
     $.ajax({
         url: '/update_data',
         method: 'GET',

@@ -1,82 +1,158 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
 section.dashboard {
+    display: flex;
     flex-direction: column;
+    justify-content: flex-start;
+    justify-self: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    font-family: "Roboto",sans-serif;
+    font-weight: 500px;
+    font-size: 1em;
+    color: #fff;
+    text-decoration: none;
 }
 
-.dashboard-main-panel {
+.dashboard-container {
+    display: flex;
     flex-direction: column;
+    background-color: #4b4a4a;
+    border-radius: 1.5rem;
+    padding: 2vw;
+    margin: 0;
 }
 
-.main-panel-KPI {
+.panel-container {
+    display: flex;
+    flex-direction: row;
+    width: 80vw;
+    height: 70vh;
+    background-color: #4b4a4a;
+    border-radius: 1.5rem;
+}
+
+
+.main-panel {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    margin: .25vw;
+    padding: 2vw;
+    border-radius: 1.5rem; /* Rounded corners for all charts */
+    background-color: #5f5e5e; /* Background color for all charts */
+}
+
+.secondary-panel {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    margin: .25vw;
+    padding: 2vw;
+    border-radius: 1.5rem; /* Rounded corners for all charts */
+    background-color: #5f5e5e; /* Background color for all charts */
+}
+
+
+
+/* KPI panel layout */
+.panel-KPIs {
+    display: flex;
     flex-direction: row;
 }
 
-.main-panel-hero {
-    
+.KPI {
+    margin-right: 10%;
 }
 
+/* Style for select dropdown */
 select {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    padding: 8px 40px 8px 16px; /* Adjust padding as needed */
-    font-size: 16px; /* Adjust font size as needed */
-    border: 1px solid #ccc;
+    padding: 8px 40px 8px 16px;
+    font-size: 16px;
     border-radius: 4px;
     background-color: #fff;
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23000000"><path d="M7 10l5 5 5-5z"/></svg>'); /* Customize arrow icon */
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23000000"><path d="M7 10l5 5 5-5z"/></svg>');
     background-repeat: no-repeat;
-    background-position: right 8px center; /* Adjust icon position */
+    background-position: right 8px center;
     cursor: pointer;
 }
 
-/* Style the dropdown options */
+/* Style for dropdown options */
 select option {
-    padding: 8px 16px; /* Adjust padding as needed */
-    font-size: 16px; /* Adjust font size as needed */
+    padding: 8px 16px;
+    font-size: 16px;
 }
 
-/* Style the selected option */
+/* Style for selected option */
 select option:checked {
     font-weight: bold;
     text-decoration: underline;
 }
 
+/* Style for all charts */
 canvas {
-    max-width: 50%;
-    max-height: 30vw;
+    width: auto;
+    height: auto;
+    font-size: 14px;
+    color: #fff; /* Adjust as needed */
+
 }
 
+/* Container for charts */
 .chart-container {
     position: relative;
     margin: auto;
-    height: 400px;
-    width: 80%;
+    width: 100%;
+    height: 100%;
 }
 
-#myChart {
-    background-color: #fff;
-    border-radius: 1.5rem;
-}
-
-/* Style the axes labels */
+/* Style for axes labels */
 .chartjs-axis-title {
-    font-size: 14px; /* Set font size */
-    font-weight: bold; /* Set font weight */
-    color: #fff; /* Set font color */
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
 }
 
-/* Style the legend */
+/* Style for legend */
 .chartjs-legend {
-    font-size: 12px; /* Set font size */
-    color: #666; /* Set font color */
+    font-size: 12px;
+    color: #fff;
 }
 
-/* Style the tooltip */
+/* Style for tooltip */
 .chartjs-tooltip {
-    font-size: 14px; /* Set font size */
-    background-color: rgba(255, 255, 255, 0.9); /* Set background color */
-    border: 1px solid #ccc; /* Set border */
-    border-radius: 5px; /* Set border radius */
-    padding: 5px; /* Set padding */
-    color: #333; /* Set font color */
+    font-size: 14px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px;
+    color: #fff;
+}
+
+/* Style for HTML tables */
+table {
+    width: 100%;
+    height: 100%;
+    border-collapse: collapse;
+    background-color: #5f5e5e; /* Background color matches the charts */
+    border-radius: 1.5rem; /* Rounded corners for all charts */
+    color: #fff; /* Text color matches the charts */
+    padding: 4vw;
+}
+
+/* Style for table headers */
+table th {
+    padding: 8px;
+    text-align: left;
+    font-size: larger;
+}
+
+/* Style for table cells */
+table td {
+    padding: 8px;
+    text-align: left;
 }

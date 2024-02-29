@@ -7,9 +7,9 @@ Traceback (most recent call last):
   File "C:\Users\Travi\OneDrive - UW\Career\Website\.venv\lib\site-packages\grpc\_channel.py", line 1005, in _end_unary_response_blocking
     raise _InactiveRpcError(state)  # pytype: disable=not-instantiable
 grpc._channel._InactiveRpcError: <_InactiveRpcError of RPC that terminated with:
-	status = StatusCode.INVALID_ARGUMENT
-	details = "Did you mean date? Field page is not a valid dimension. For a list of valid dimensions and metrics, see https://developers.google.com/analytics/devguides/reporting/data/v1/api-schema "
-	debug_error_string = "UNKNOWN:Error received from peer ipv6:%5B2607:f8b0:400a:805::200a%5D:443 {grpc_message:"Did you mean date? Field page is not a valid dimension. For a list of valid dimensions and metrics, see https://developers.google.com/analytics/devguides/reporting/data/v1/api-schema ", grpc_status:3, created_time:"2024-02-25T21:33:26.5352463+00:00"}"
+	status = StatusCode.DEADLINE_EXCEEDED
+	details = "Deadline Exceeded"
+	debug_error_string = "UNKNOWN:Error received from peer  {grpc_message:"Deadline Exceeded", grpc_status:4, created_time:"2024-02-29T01:03:32.6852345+00:00"}"
 >
 
 The above exception was the direct cause of the following exception:
@@ -23,86 +23,13 @@ Traceback (most recent call last):
     rv = self.dispatch_request()
   File "C:\Users\Travi\OneDrive - UW\Career\Website\.venv\lib\site-packages\flask\app.py", line 855, in dispatch_request
     return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
-  File "c:\Users\Travi\OneDrive - UW\Career\Website\server.py", line 99, in get_data
-    events = run_custom_report(
-  File "c:\Users\Travi\OneDrive - UW\Career\Website\google_data.py", line 68, in run_custom_report
-    response = client.run_report(request)
-  File "C:\Users\Travi\OneDrive - UW\Career\Website\.venv\lib\site-packages\google\analytics\data_v1beta\services\beta_analytics_data\client.py", line 769, in run_report
-    response = rpc(
-  File "C:\Users\Travi\OneDrive - UW\Career\Website\.venv\lib\site-packages\google\api_core\gapic_v1\method.py", line 131, in __call__
-    return wrapped_func(*args, **kwargs)
-  File "C:\Users\Travi\OneDrive - UW\Career\Website\.venv\lib\site-packages\google\api_core\timeout.py", line 120, in func_with_timeout
-    return func(*args, **kwargs)
-  File "C:\Users\Travi\OneDrive - UW\Career\Website\.venv\lib\site-packages\google\api_core\grpc_helpers.py", line 78, in error_remapped_callable
-    raise exceptions.from_grpc_error(exc) from exc
-google.api_core.exceptions.InvalidArgument: 400 Did you mean date? Field page is not a valid dimension. For a list of valid dimensions and metrics, see https://developers.google.com/analytics/devguides/reporting/data/v1/api-schema 
-Exception on /dashboard [GET]
-Traceback (most recent call last):
-  File "C:\Users\Travi\OneDrive - UW\Career\Website\.venv\lib\site-packages\flask\app.py", line 1463, in wsgi_app
-    response = self.full_dispatch_request()
-  File "C:\Users\Travi\OneDrive - UW\Career\Website\.venv\lib\site-packages\flask\app.py", line 872, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "C:\Users\Travi\OneDrive - UW\Career\Website\.venv\lib\site-packages\flask\app.py", line 870, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "C:\Users\Travi\OneDrive - UW\Career\Website\.venv\lib\site-packages\flask\app.py", line 855, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
-  File "c:\Users\Travi\OneDrive - UW\Career\Website\server.py", line 94, in get_data
-    if cached_users_by_city_labels is None or cached_users_by_city_data is None \
-NameError: name 'cached_users_by_city_labels' is not defined
-Exception on /dashboard [GET]
-Traceback (most recent call last):
-  File "C:\Users\Travi\OneDrive - UW\Career\Website\.venv\lib\site-packages\flask\app.py", line 1463, in wsgi_app
-    response = self.full_dispatch_request()
-  File "C:\Users\Travi\OneDrive - UW\Career\Website\.venv\lib\site-packages\flask\app.py", line 872, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "C:\Users\Travi\OneDrive - UW\Career\Website\.venv\lib\site-packages\flask\app.py", line 870, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "C:\Users\Travi\OneDrive - UW\Career\Website\.venv\lib\site-packages\flask\app.py", line 855, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
-  File "c:\Users\Travi\OneDrive - UW\Career\Website\server.py", line 94, in get_data
-    if cached_users_by_city_labels is None or cached_users_by_city_data is None \
-NameError: name 'cached_users_by_city_labels' is not defined
-Exception on /dashboard [GET]
-Traceback (most recent call last):
-  File "C:\Users\Travi\OneDrive - UW\Career\Website\.venv\lib\site-packages\flask\app.py", line 1463, in wsgi_app
-    response = self.full_dispatch_request()
-  File "C:\Users\Travi\OneDrive - UW\Career\Website\.venv\lib\site-packages\flask\app.py", line 872, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "C:\Users\Travi\OneDrive - UW\Career\Website\.venv\lib\site-packages\flask\app.py", line 870, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "C:\Users\Travi\OneDrive - UW\Career\Website\.venv\lib\site-packages\flask\app.py", line 855, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
-  File "c:\Users\Travi\OneDrive - UW\Career\Website\server.py", line 94, in get_data
-    if cached_users_by_city_labels is None or cached_users_by_city_data is None \
-NameError: name 'cached_users_by_city_labels' is not defined
-Exception on /update_data [GET]
-Traceback (most recent call last):
-  File "C:\Users\Travi\OneDrive - UW\Career\Website\.venv\lib\site-packages\google\api_core\grpc_helpers.py", line 76, in error_remapped_callable
-    return callable_(*args, **kwargs)
-  File "C:\Users\Travi\OneDrive - UW\Career\Website\.venv\lib\site-packages\grpc\_channel.py", line 1176, in __call__
-    return _end_unary_response_blocking(state, call, False, None)
-  File "C:\Users\Travi\OneDrive - UW\Career\Website\.venv\lib\site-packages\grpc\_channel.py", line 1005, in _end_unary_response_blocking
-    raise _InactiveRpcError(state)  # pytype: disable=not-instantiable
-grpc._channel._InactiveRpcError: <_InactiveRpcError of RPC that terminated with:
-	status = StatusCode.INVALID_ARGUMENT
-	details = "Did you mean screenResolution? Field screenPageViews is not a valid dimension. For a list of valid dimensions and metrics, see https://developers.google.com/analytics/devguides/reporting/data/v1/api-schema "
-	debug_error_string = "UNKNOWN:Error received from peer ipv6:%5B2607:f8b0:400a:806::200a%5D:443 {created_time:"2024-02-25T23:55:05.7327781+00:00", grpc_status:3, grpc_message:"Did you mean screenResolution? Field screenPageViews is not a valid dimension. For a list of valid dimensions and metrics, see https://developers.google.com/analytics/devguides/reporting/data/v1/api-schema "}"
->
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "C:\Users\Travi\OneDrive - UW\Career\Website\.venv\lib\site-packages\flask\app.py", line 1463, in wsgi_app
-    response = self.full_dispatch_request()
-  File "C:\Users\Travi\OneDrive - UW\Career\Website\.venv\lib\site-packages\flask\app.py", line 872, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "C:\Users\Travi\OneDrive - UW\Career\Website\.venv\lib\site-packages\flask\app.py", line 870, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "C:\Users\Travi\OneDrive - UW\Career\Website\.venv\lib\site-packages\flask\app.py", line 855, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
-  File "c:\Users\Travi\OneDrive - UW\Career\Website\server.py", line 139, in update_data
+  File "c:\Users\Travi\OneDrive - UW\Career\Website\server.py", line 88, in dashboard
+    data = get_data()
+  File "c:\Users\Travi\OneDrive - UW\Career\Website\google_data.py", line 165, in get_data
+    data = fetch_data(start_date)
+  File "c:\Users\Travi\OneDrive - UW\Career\Website\google_data.py", line 40, in fetch_data
     events_by_page = run_custom_report(
-  File "c:\Users\Travi\OneDrive - UW\Career\Website\google_data.py", line 68, in run_custom_report
+  File "c:\Users\Travi\OneDrive - UW\Career\Website\google_data.py", line 247, in run_custom_report
     response = client.run_report(request)
   File "C:\Users\Travi\OneDrive - UW\Career\Website\.venv\lib\site-packages\google\analytics\data_v1beta\services\beta_analytics_data\client.py", line 769, in run_report
     response = rpc(
@@ -112,4 +39,18 @@ Traceback (most recent call last):
     return func(*args, **kwargs)
   File "C:\Users\Travi\OneDrive - UW\Career\Website\.venv\lib\site-packages\google\api_core\grpc_helpers.py", line 78, in error_remapped_callable
     raise exceptions.from_grpc_error(exc) from exc
-google.api_core.exceptions.InvalidArgument: 400 Did you mean screenResolution? Field screenPageViews is not a valid dimension. For a list of valid dimensions and metrics, see https://developers.google.com/analytics/devguides/reporting/data/v1/api-schema 
+google.api_core.exceptions.DeadlineExceeded: 504 Deadline Exceeded
+Dashboard data: {'users_by_city_labels': ['Seattle', '(not set)', 'Delano', 'Boydton', 'Columbus', 'Etna', 'Hyderabad', 'Redmond', 'Sparks', 'Warden', 'Warm Springs'], 'users_by_city_data': [6, 3, 2, 1, 1, 1, 1, 1, 1, 1, 1], 'events_by_page_labels': ['Home', 'Projects', 'Admin Dashboard', 'Weather App', 'Get Weather Conditions', 'DubGrub Project', 'City Not Found', 'Website Project'], 'events_by_page_data': [238, 206, 97, 92, 65, 44, 7, 6], 'sessions_by_source_labels': ['(direct)', '(not set)'], 'sessions_by_source_data': [55, 2], 'users_by_day_labels': ['20240221', '20240222', '20240223', '20240224', '20240225', '20240226', '20240227', '20240228'], 'users_by_day_data': [12, 5, 2, 2, 2, 0, 2, 0], 'users_by_hour_labels': ['21', '1', '15', '18', '13', '23', '0', '12', '14', '16', '17', '19', '22', '10', '11', '20', '7', '8'], 'users_by_hour_data': [6, 5, 5, 5, 4, 3, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1]}
+Update data response: <Response 795 bytes [200 OK]>
+Dashboard data: {'users_by_city_labels': ['Seattle', '(not set)', 'Delano', 'Boydton', 'Columbus', 'Etna', 'Hyderabad', 'Redmond', 'Sparks', 'Warden', 'Warm Springs'], 'users_by_city_data': [6, 3, 2, 1, 1, 1, 1, 1, 1, 1, 1], 'events_by_page_labels': ['Home', 'Projects', 'Admin Dashboard', 'Weather App', 'Get Weather Conditions', 'DubGrub Project', 'City Not Found', 'Website Project'], 'events_by_page_data': [238, 206, 97, 92, 65, 44, 7, 6], 'sessions_by_source_labels': ['(direct)', '(not set)'], 'sessions_by_source_data': [55, 2], 'users_by_day_labels': ['20240221', '20240222', '20240223', '20240224', '20240225', '20240226', '20240227', '20240228'], 'users_by_day_data': [12, 5, 2, 2, 2, 0, 2, 0], 'users_by_hour_labels': ['21', '1', '15', '18', '13', '23', '0', '12', '14', '16', '17', '19', '22', '10', '11', '20', '7', '8'], 'users_by_hour_data': [6, 5, 5, 5, 4, 3, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1]}
+Update data response: <Response 795 bytes [200 OK]>
+Dashboard data: {'users_by_city_labels': ['Seattle', '(not set)', 'Delano', 'Boydton', 'Columbus', 'Etna', 'Hyderabad', 'Redmond', 'Sparks', 'Warden', 'Warm Springs'], 'users_by_city_data': [6, 3, 2, 1, 1, 1, 1, 1, 1, 1, 1], 'events_by_page_labels': ['Home', 'Projects', 'Admin Dashboard', 'Weather App', 'Get Weather Conditions', 'DubGrub Project', 'City Not Found', 'Website Project'], 'events_by_page_data': [238, 206, 97, 92, 65, 44, 7, 6], 'sessions_by_source_labels': ['(direct)', '(not set)'], 'sessions_by_source_data': [55, 2], 'users_by_day_labels': ['20240221', '20240222', '20240223', '20240224', '20240225', '20240226', '20240227', '20240228'], 'users_by_day_data': [12, 5, 2, 2, 2, 0, 2, 0], 'users_by_hour_labels': ['21', '1', '15', '18', '13', '23', '0', '12', '14', '16', '17', '19', '22', '10', '11', '20', '7', '8'], 'users_by_hour_data': [6, 5, 5, 5, 4, 3, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1]}
+Update data response: <Response 795 bytes [200 OK]>
+Dashboard data: {'users_by_city_labels': ['Seattle', '(not set)', 'Delano', 'Boydton', 'Columbus', 'Etna', 'Hyderabad', 'Redmond', 'Sparks', 'Warden', 'Warm Springs'], 'users_by_city_data': [6, 3, 2, 1, 1, 1, 1, 1, 1, 1, 1], 'events_by_page_labels': ['Home', 'Projects', 'Admin Dashboard', 'Weather App', 'Get Weather Conditions', 'DubGrub Project', 'City Not Found', 'Website Project'], 'events_by_page_data': [238, 206, 97, 92, 65, 44, 7, 6], 'sessions_by_source_labels': ['(direct)', '(not set)'], 'sessions_by_source_data': [55, 2], 'users_by_day_labels': ['20240221', '20240222', '20240223', '20240224', '20240225', '20240226', '20240227', '20240228'], 'users_by_day_data': [12, 5, 2, 2, 2, 0, 2, 0], 'users_by_hour_labels': ['21', '1', '15', '18', '13', '23', '0', '12', '14', '16', '17', '19', '22', '10', '11', '20', '7', '8'], 'users_by_hour_data': [6, 5, 5, 5, 4, 3, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1]}
+Update data response: <Response 795 bytes [200 OK]>
+Dashboard data: {'users_by_city_labels': ['Seattle', '(not set)', 'Delano', 'Boydton', 'Columbus', 'Etna', 'Hyderabad', 'Redmond', 'Sparks', 'Warden', 'Warm Springs'], 'users_by_city_data': [6, 3, 2, 1, 1, 1, 1, 1, 1, 1, 1], 'events_by_page_labels': ['Home', 'Projects', 'Admin Dashboard', 'Weather App', 'Get Weather Conditions', 'DubGrub Project', 'City Not Found', 'Website Project'], 'events_by_page_data': [238, 206, 97, 92, 65, 44, 7, 6], 'sessions_by_source_labels': ['(direct)', '(not set)'], 'sessions_by_source_data': [55, 2], 'users_by_day_labels': ['20240221', '20240222', '20240223', '20240224', '20240225', '20240226', '20240227', '20240228'], 'users_by_day_data': [12, 5, 2, 2, 2, 0, 2, 0], 'users_by_hour_labels': ['21', '1', '15', '18', '13', '23', '0', '12', '14', '16', '17', '19', '22', '10', '11', '20', '7', '8'], 'users_by_hour_data': [6, 5, 5, 5, 4, 3, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1]}
+Update data response: <Response 795 bytes [200 OK]>
+Dashboard data: {'users_by_city_labels': ['Seattle', '(not set)', 'Delano', 'Boydton', 'Columbus', 'Etna', 'Hyderabad', 'Redmond', 'Sparks', 'Warden', 'Warm Springs'], 'users_by_city_data': [6, 3, 2, 1, 1, 1, 1, 1, 1, 1, 1], 'events_by_page_labels': ['Home', 'Projects', 'Admin Dashboard', 'Weather App', 'Get Weather Conditions', 'DubGrub Project', 'City Not Found', 'Website Project'], 'events_by_page_data': [238, 206, 97, 92, 65, 44, 7, 6], 'sessions_by_source_labels': ['(direct)', '(not set)'], 'sessions_by_source_data': [55, 2], 'users_by_day_labels': ['20240221', '20240222', '20240223', '20240224', '20240225', '20240226', '20240227', '20240228'], 'users_by_day_data': [12, 5, 2, 2, 2, 0, 2, 0], 'users_by_hour_labels': ['21', '1', '15', '18', '13', '23', '0', '12', '14', '16', '17', '19', '22', '10', '11', '20', '7', '8'], 'users_by_hour_data': [6, 5, 5, 5, 4, 3, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1]}
+Update data response: <Response 795 bytes [200 OK]>
+Dashboard data: {'users_by_city_labels': ['Seattle', '(not set)', 'Delano', 'Boydton', 'Columbus', 'Etna', 'Hyderabad', 'Redmond', 'Sparks', 'Warden', 'Warm Springs'], 'users_by_city_data': [6, 3, 2, 1, 1, 1, 1, 1, 1, 1, 1], 'events_by_page_labels': ['Home', 'Projects', 'Admin Dashboard', 'Weather App', 'Get Weather Conditions', 'DubGrub Project', 'City Not Found', 'Website Project'], 'events_by_page_data': [238, 206, 97, 92, 65, 44, 7, 6], 'sessions_by_source_labels': ['(direct)', '(not set)'], 'sessions_by_source_data': [55, 2], 'users_by_day_labels': ['20240221', '20240222', '20240223', '20240224', '20240225', '20240226', '20240227', '20240228'], 'users_by_day_data': [12, 5, 2, 2, 2, 0, 2, 0], 'users_by_hour_labels': ['21', '1', '15', '18', '13', '23', '0', '12', '14', '16', '17', '19', '22', '10', '11', '20', '7', '8'], 'users_by_hour_data': [6, 5, 5, 5, 4, 3, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1]}
+Update data response: <Response 795 bytes [200 OK]>
