@@ -18,7 +18,7 @@ $(document).ready(function() {
                 datasets: [{
                     label: 'Active Users by City',
                     data: usersByCityData,
-                    borderWidth: 1
+                    backgroundColor: '#e97911' // Set background color to orange
                 }]
             },
             options: {
@@ -27,13 +27,28 @@ $(document).ready(function() {
                         beginAtZero: true,
                         title: {
                             display: true,
-                            text: 'Active Users'
+                            text: 'Active Users',
+                            color: '#fff' // Set title color to white
+                        },
+                        ticks: {
+                            color: '#fff' // Set ticks color to white
                         }
                     },
                     x: {
                         title: {
                             display: true,
-                            text: 'City'
+                            text: 'City',
+                            color: '#fff' // Set title color to white
+                        },
+                        ticks: {
+                            color: '#fff' // Set ticks color to white
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: '#fff' // Set label color to white
                         }
                     }
                 }
@@ -65,7 +80,8 @@ $(document).ready(function() {
                 datasets: [{
                     label: 'Users per Day',
                     data: usersByDayData,
-                    borderWidth: 1
+                    borderWidth: 1,
+                    borderColor: '#e97911' // Set border color to orange
                 }]
             },
             options: {
@@ -74,13 +90,28 @@ $(document).ready(function() {
                         beginAtZero: true,
                         title: {
                             display: true,
-                            text: 'Users'
+                            text: 'Active Users',
+                            color: '#fff' // Set title color to white
+                        },
+                        ticks: {
+                            color: '#fff' // Set ticks color to white
                         }
                     },
                     x: {
                         title: {
                             display: true,
-                            text: 'Day'
+                            text: 'City',
+                            color: '#fff' // Set title color to white
+                        },
+                        ticks: {
+                            color: '#fff' // Set ticks color to white
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: '#fff' // Set label color to white
                         }
                     }
                 }

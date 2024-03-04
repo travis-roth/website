@@ -14,18 +14,6 @@ os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = os.getenv("GDA_API_KEY")
 
 property_id = os.getenv("GA4_PROPERTY_ID")
 
-cached_users_by_city_labels = None
-cached_users_by_city_data = None
-cached_events_by_page_labels = None
-cached_events_by_page_data = None
-cached_sessions_by_source_labels = None
-cached_sessions_by_source_data = None
-cached_users_by_day_labels = None
-cached_users_by_day_data = None
-cached_users_by_time_labels = None
-cached_users_by_time_data = None
-
-
 def fetch_data(start_date, end_date="today"):
     global cached_users_by_city_labels, cached_users_by_city_data, cached_events_by_page_labels, cached_events_by_page_data, cached_sessions_by_source_labels, cached_sessions_by_source_data, cached_users_by_day_labels, cached_users_by_day_data, cached_users_by_hour_labels, cached_users_by_hour_data
 
@@ -146,55 +134,20 @@ def parse_date_term(date_term):
         # Default to today's date
         return datetime.today().strftime("%Y-%m-%d")
 
-def get_data():
-    global cached_users_by_city_labels, cached_users_by_city_data, cached_events_by_page_labels, cached_events_by_page_data, cached_sessions_by_source_labels, cached_sessions_by_source_data, cached_users_by_day_labels, cached_users_by_day_data, cached_users_by_hour_labels, cached_users_by_hour_data
-
-    start_date = request.args.get('startDate')
-
-    if start_date is None:
-        # Set a default start date, e.g., 7 days ago from today
-        default_start_date = "7daysAgo"
-        start_date = default_start_date
-
-    if cached_users_by_city_labels is None or cached_users_by_city_data is None \
-            or cached_events_by_page_labels is None or cached_events_by_page_data is None \
-            or cached_sessions_by_source_labels is None or cached_sessions_by_source_data is None \
-            or cached_users_by_day_labels is None or cached_users_by_day_data is None \
-            or cached_users_by_hour_labels is None or cached_users_by_hour_data is None:
-        # Fetch data only if it hasn't been fetched before
-        data = fetch_data(start_date)
-        cached_users_by_city_labels = data['users_by_city_labels']
-        cached_users_by_city_data = data['users_by_city_data']
-        cached_events_by_page_labels = data['events_by_page_labels']
-        cached_events_by_page_data = data['events_by_page_data']
-        cached_sessions_by_source_labels = data['sessions_by_source_labels']
-        cached_sessions_by_source_data = data['sessions_by_source_data']
-        cached_users_by_day_labels = data['users_by_day_labels']
-        cached_users_by_day_data = data['users_by_day_data']
-        cached_users_by_hour_labels = data['users_by_hour_labels']
-        cached_users_by_hour_data = data['users_by_hour_data']
-
-    return {
-        'users_by_city_labels': cached_users_by_city_labels,
-        'users_by_city_data': cached_users_by_city_data,
-        'events_by_page_labels': cached_events_by_page_labels,
-        'events_by_page_data': cached_events_by_page_data,
-        'sessions_by_source_labels': cached_sessions_by_source_labels,
-        'sessions_by_source_data': cached_sessions_by_source_data,
-        'users_by_day_labels': cached_users_by_day_labels,
-        'users_by_day_data': cached_users_by_day_data,
-        'users_by_hour_labels': cached_users_by_hour_labels,
-        'users_by_hour_data': cached_users_by_hour_data
-    }
-
-def update_data():
-    start_date = request.args.get('startDate')
-
-    # Fetch updated data based on the new start date
+def get_data(start_date):
     data = fetch_data(start_date)
-
-    return jsonify(data)
-
+    return {
+        'users_by_city_labels': data['users_by_city_labels'],
+        'users_by_city_data': data['users_by_city_data'],
+        'events_by_page_labels': data['events_by_page_labels'],
+        'events_by_page_data': data['events_by_page_data'],
+        'sessions_by_source_labels': data['sessions_by_source_data'],
+        'sessions_by_source_data': data['sessions_by_source_data'],
+        'users_by_day_labels': data['users_by_day_labels'],
+        'users_by_day_data': data['users_by_day_data'],
+        'users_by_hour_labels': data['users_by_hour_labels'],
+        'users_by_hour_data': data['users_by_hour_data']
+    }
 
 def print_run_report_response(response):
     """Prints results of a runReport call."""

@@ -3,9 +3,24 @@ from weather import get_current_weather
 from waitress import serve
 import logging
 from logging.handlers import RotatingFileHandler
-from google_data import run_custom_report, preprocess_response, get_data, update_data
+from google_data import get_data
+from flask_apscheduler import APScheduler
+from datetime import datetime, timedelta
+
 
 app = Flask(__name__)
+scheduler = APScheduler()
+
+DEFAULT_START_DATE = "yesterday"
+
+cached_data = {
+    "yesterday": None,
+    "7daysAgo": None,
+    "30daysAgo": None
+}
+
+last_cache_time = None
+cache_duration = timedelta(days=1)  # Cache duration is set to 1 day
 
 # logging
 def configure_logging(app):
@@ -83,30 +98,69 @@ def edfr():
 def website():
     return render_template('/website.html')
 
+def fetch_and_cache_data():
+    global cached_data
+    # Fetch data from the Google Analytics API
+    # This is where you'd call your fetch_data function
+    # For demonstration, I'll assume fetch_data returns some dummy data
+    cached_data['yesterday'] = get_data("yesterday")
+    cached_data['7daysAgo'] = get_data("7daysAgo")
+    cached_data['30daysAgo'] = get_data("30daysAgo")
+
+    last_cache_time = datetime.now()
+
+    app.logger.debug("Cached Data yesterday: %s", cached_data['yesterday'])
+    app.logger.debug("Cached Data 7daysAgo: %s", cached_data['7daysAgo'])
+    app.logger.debug("Cached Data 30daysAgo: %s", cached_data['30daysAgo'])
+
+
+
+# manually trigger caching
+@app.route('/cache_data')
+def cache_data():
+    fetch_and_cache_data()
+    return 'Data cached successfully'
+
 @app.route('/dashboard')
 def dashboard():
-    data = get_data()
-    app.logger.debug("Dashboard data: %s", data)
-    return render_template("dashboard.html", 
-                           users_by_city_labels=data['users_by_city_labels'],
-                           users_by_city_data=data['users_by_city_data'],
-                           events_by_page_labels=data['events_by_page_labels'],
-                           events_by_page_data=data['events_by_page_data'],
-                           sessions_by_source_labels=data['sessions_by_source_labels'],
-                           sessions_by_source_data=data['sessions_by_source_data'],
-                           users_by_day_labels=data['users_by_day_labels'],
-                           users_by_day_data=data['users_by_day_data'],
-                           users_by_hour_labels=data['users_by_hour_labels'],
-                           users_by_hour_data=data['users_by_hour_data'])
+    global cached_data_30daysAgo,cached_data_7daysAgo,cached_data_yesterday
+    start_date = request.args.get('startDate',DEFAULT_START_DATE)
+    app.logger.debug("Dashboard data: %s", start_date, cached_data[start_date])
+    return render_template("dashboard.html",
+                           users_by_city_labels=cached_data[start_date]['users_by_city_labels'],
+                           users_by_city_data=cached_data[start_date]['users_by_city_data'],
+                           events_by_page_labels=cached_data[start_date]['events_by_page_labels'],
+                           events_by_page_data=cached_data[start_date]['events_by_page_data'],
+                           sessions_by_source_labels=cached_data[start_date]['sessions_by_source_labels'],
+                           sessions_by_source_data=cached_data[start_date]['sessions_by_source_data'],
+                           users_by_day_labels=cached_data[start_date]['users_by_day_labels'],
+                           users_by_day_data=cached_data[start_date]['users_by_day_data'],
+                           users_by_hour_labels=cached_data[start_date]['users_by_hour_labels'],
+                           users_by_hour_data=cached_data[start_date]['users_by_hour_data'])
 
 @app.route('/update_data')
 def update():
-    response_data = update_data()
-    app.logger.debug("Update data response: %s", response_data)
+    start_date = request.args.get('startDate')
+    response_data = {
+        "users_by_city_labels": cached_data[start_date]['users_by_city_labels'],
+        "users_by_city_data": cached_data[start_date]['users_by_city_data'],
+        "events_by_page_labels": cached_data[start_date]['events_by_page_labels'],
+        "events_by_page_data": cached_data[start_date]['events_by_page_data'],
+        "sessions_by_source_labels": cached_data[start_date]['sessions_by_source_labels'],
+        "sessions_by_source_data": cached_data[start_date]['sessions_by_source_data'],
+        "users_by_day_labels": cached_data[start_date]['users_by_day_labels'],
+        "users_by_day_data": cached_data[start_date]['users_by_day_data'],
+        "users_by_hour_labels": cached_data[start_date]['users_by_hour_labels'],
+        "users_by_hour_data": cached_data[start_date]['users_by_hour_data']
+    }
     return response_data
 
-
-
+@scheduler.task('interval', id='cache_job', days=1)
+def scheduled_cache_job():
+    fetch_and_cache_data()
 
 if __name__ == "__main__":
+    fetch_and_cache_data()
+    scheduler.init_app(app)
+    scheduler.start()
     serve(app, host="0.0.0.0", port=8000)
