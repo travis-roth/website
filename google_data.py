@@ -32,6 +32,13 @@ def fetch_data(start_date, end_date="today"):
         end_date=end_date
     )
 
+    events_by_day = run_custom_report(
+        metrics=["screenPageViews"],
+        dimensions=["date"],
+        start_date=start_date,
+        end_date=end_date
+    )
+
     sessions_by_source = run_custom_report(
         metrics=["sessions"],
         dimensions=["sessionSource"],
@@ -56,25 +63,31 @@ def fetch_data(start_date, end_date="today"):
     # Preprocess and return the data
     users_by_city_labels, users_by_city_data = preprocess_response(users_by_city)
     events_by_page_labels, events_by_page_data = preprocess_response(events_by_page)
+    events_by_day_labels, events_by_day_data = preprocess_response(events_by_day)
     sessions_by_source_labels, sessions_by_source_data = preprocess_response(sessions_by_source)
     users_by_day_labels, users_by_day_data = preprocess_response(users_by_day)
     users_by_hour_labels, users_by_hour_data = preprocess_response(users_by_hour)
 
     # Fill in missing dates with 0 users and order arrays by date
-    filled_dates, filled_data = fill_and_order_dates(users_by_day_labels, users_by_day_data, start_date, end_date)
+    filled_event_dates, filled_event_data = fill_and_order_dates(events_by_day_labels, events_by_day_data, start_date, end_date)
+    filled_user_dates, filled_user_data = fill_and_order_dates(users_by_day_labels, users_by_day_data, start_date, end_date)
 
     return {
         'users_by_city_labels': users_by_city_labels,
         'users_by_city_data': users_by_city_data,
         'events_by_page_labels': events_by_page_labels,
         'events_by_page_data': events_by_page_data,
+        'events_by_day_labels': filled_event_dates,
+        'events_by_day_data': filled_event_data,
         'sessions_by_source_labels': sessions_by_source_labels,
         'sessions_by_source_data': sessions_by_source_data,
-        'users_by_day_labels': filled_dates,
-        'users_by_day_data': filled_data,
+        'users_by_day_labels': filled_user_dates,
+        'users_by_day_data': filled_user_data,
         'users_by_hour_labels': users_by_hour_labels,
         'users_by_hour_data': users_by_hour_data
     }
+
+from datetime import datetime, timedelta
 
 def fill_and_order_dates(labels, data, start_date, end_date):
     """
@@ -83,8 +96,8 @@ def fill_and_order_dates(labels, data, start_date, end_date):
     Args:
         labels (list): List of dates in YYYYMMDD format.
         data (list): Corresponding data points.
-        start_date (str): Start date in YYYYMMDD format.
-        end_date (str): End date in YYYYMMDD format.
+        start_date (str): Start date term.
+        end_date (str): End date term.
     
     Returns:
         Tuple containing filled and ordered dates and corresponding filled and ordered data points.
@@ -95,16 +108,17 @@ def fill_and_order_dates(labels, data, start_date, end_date):
     start_date_as_datetime = parse_date_term(start_date)
     end_date_as_datetime = parse_date_term(end_date)
     
-    current_date = datetime.strptime(start_date_as_datetime, "%Y-%m-%d")
-    end_date = datetime.strptime(end_date_as_datetime, "%Y-%m-%d")
+    current_date = start_date_as_datetime
     
     # Fill in missing dates with 0 values
-    while current_date <= end_date:
-        date_str = current_date.strftime("%Y%m%d")
+    while current_date <= end_date_as_datetime:
+        date_str = current_date.strftime("%m/%d/%Y")
+        label_date_str = current_date.strftime("%Y%m%d")
+
         filled_dates.append(date_str)
         
-        if date_str in labels:
-            index = labels.index(date_str)
+        if label_date_str in labels:
+            index = labels.index(label_date_str)
             filled_data.append(data[index])
         else:
             filled_data.append(0)
@@ -112,6 +126,9 @@ def fill_and_order_dates(labels, data, start_date, end_date):
         current_date += timedelta(days=1)
     
     return filled_dates, filled_data
+
+
+from datetime import datetime, timedelta
 
 def parse_date_term(date_term):
     """
@@ -121,18 +138,21 @@ def parse_date_term(date_term):
         date_term (str): Date term string.
 
     Returns:
-        str: Date string in "%Y-%m-%d" format.
+        datetime: Date object.
     """
     if date_term == "yesterday":
-        return (datetime.today() - timedelta(days=1)).strftime("%Y-%m-%d")
+        return datetime.today() - timedelta(days=1)
     elif date_term == "today":
-        return datetime.today().strftime("%Y-%m-%d")
+        return datetime.today()
     elif date_term.endswith("daysAgo"):
         days_ago = int(date_term[:-7])
-        return (datetime.today() - timedelta(days=days_ago)).strftime("%Y-%m-%d")
+        return datetime.today() - timedelta(days=days_ago)
     else:
         # Default to today's date
-        return datetime.today().strftime("%Y-%m-%d")
+        return datetime.today()
+
+
+
 
 def get_data(start_date):
     data = fetch_data(start_date)
@@ -141,7 +161,9 @@ def get_data(start_date):
         'users_by_city_data': data['users_by_city_data'],
         'events_by_page_labels': data['events_by_page_labels'],
         'events_by_page_data': data['events_by_page_data'],
-        'sessions_by_source_labels': data['sessions_by_source_data'],
+        'events_by_day_labels': data['events_by_day_labels'],
+        'events_by_day_data': data['events_by_day_data'],
+        'sessions_by_source_labels': data['sessions_by_source_labels'],
         'sessions_by_source_data': data['sessions_by_source_data'],
         'users_by_day_labels': data['users_by_day_labels'],
         'users_by_day_data': data['users_by_day_data'],

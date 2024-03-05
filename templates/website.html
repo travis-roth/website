@@ -16,31 +16,33 @@
 <body>
     <section class="dashboard">
         <div class="dashboard-container">
-            <h1>Portfoli Website Details</h1>
-            <p>This website is the culmination of many projects designed to showcase my ability to learn. You can view the code on <a href="https://github.com/travis-roth/website" target="_blank" class = btn-ppage>GitHub<i class="fa-solid fa-arrow-right"></i></a></p>
-            <p>One of the leading motivations for building this was to expand my knowledge of web analytics and measurement. Below is an administrative dashboard for the website, gathered through Google Analytics' Data API. Enjoy!</p>
-            <form id="startDateForm">
-                <label for="startDate">Select Start Date:</label>
-                <select name="startDate" id="startDate">
-                    <option value="yesterday">1 Day</option>
-                    <option value="7daysAgo" selected>7 Days</option>
-                    <option value="30daysAgo">30 Days</option>
-                </select><br>
-            </form>
+            <div class="text-container">
+                <h1>Portfolio Website Details</h1>
+                <p>This website is the culmination of everything I've learned so far, designed to showcase my work and share it with you. If you're interested in how it was built, you can view the code on <a href="https://github.com/travis-roth/website" target="_blank" class = btn-ppage>GitHub<i class="fa-solid fa-arrow-right"></i></a></p>
+                <p>One of the leading motivations for building this project was to expand my knowledge of web analytics and measurement. Below is an administrative dashboard for the website, with data collected through the Google Analytics data API. Enjoy!</p>
+            </div>
             <div class="panel-container">
                 <div class="main-panel">
                     <div class="panel-KPIs">
                         <div class="KPI">
-                            <h1>Users</h1>
-                        </div>
-                        <div class="KPI">
-                            <h1>Users</h1>
-                        </div>
-                        <div class="KPI">
-                            <h1>Users</h1>
+                            <form id="heroMetricForm">
+                                <label for="heroMetric">Select Metric:</label>
+                                <select name="heroMetric" id="heroMetric">
+                                    <option value="Users" selected>Users</option>
+                                    <option value="Views">Views</option>
+                                </select><br>
+                            </form>
                         </div>
                     </div>
                     <canvas id="lineChart" width="400" height="200"></canvas>
+                    <form id="startDateForm">
+                        <label for="startDate">Select Time Frame:</label>
+                        <select name="startDate" id="startDate">
+                            <option value="yesterday">1 Day</option>
+                            <option value="7daysAgo" selected>7 Days</option>
+                            <option value="30daysAgo">30 Days</option>
+                        </select><br>
+                    </form>
                 </div>
                 <div class="secondary-panel">
                     <div class="panel-KPIs">

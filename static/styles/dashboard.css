@@ -24,6 +24,17 @@ section.dashboard {
     margin: 0;
 }
 
+.dashboard-container p {
+    margin-bottom: 1vh;
+}
+
+.text-container {
+    display: flex;
+    flex-direction: column;
+    width: 80vw;
+    margin: .25vw;
+}
+
 .panel-container {
     display: flex;
     flex-direction: row;
