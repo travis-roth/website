@@ -121,7 +121,7 @@ def cache_data():
     fetch_and_cache_data()
     return 'Data cached successfully'
 
-@app.route('/dashboard')
+@app.route('/website')
 def dashboard():
     global cached_data_30daysAgo,cached_data_7daysAgo,cached_data_yesterday
     start_date = request.args.get('startDate',DEFAULT_START_DATE)
