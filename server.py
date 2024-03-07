@@ -89,6 +89,11 @@ def bloodworks():
     logger.debug('Rendering bloodworks page')
     return render_template('/bloodworks.html', current_page='bloodworks')
 
+@app.route('/billionaires')
+def billionaires():
+    logger.debug('Rendering billionaires page')
+    return render_template('/billionaires.html', current_page='billionaires')
+
 @app.route('/edfr')
 def edfr():
     logger.debug('Rendering edfr page')

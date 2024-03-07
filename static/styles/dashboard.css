@@ -26,6 +26,7 @@ section.dashboard {
 
 .dashboard-container p {
     margin-bottom: 1vh;
+    line-height: 1.5em;
 }
 
 .text-container {
