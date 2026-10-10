@@ -1,6 +1,7 @@
 .venv
 .env
 __pycache__
+dist/
 credentials
 app.log
 app.log.1

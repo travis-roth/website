@@ -8,25 +8,29 @@
 
 {% block content %}
 
-<section class="weather" data-status="{{ status }}">
+<section class="weather" id="weather" data-status="">
     <div class="rain"></div>
     <div class="sun"></div>
     <div class="clouds"></div>
     <div class="weather-details">
-        <h1>{{ title }} Weather</h1>
-        <p>{{ status }} and {{ temp }} &deg;</p>
-        <p>Feels like {{ feels_like }} &deg;</p>
+        <div id="weather-result" hidden>
+            <h1><span id="weather-city"></span> Weather</h1>
+            <p><span id="weather-status"></span> and <span id="weather-temp"></span> &deg;</p>
+            <p>Feels like <span id="weather-feels"></span> &deg;</p>
+        </div>
+        <div id="weather-error" hidden>
+            <h1 id="weather-error-title">City Not Found</h1>
+            <h3>Try Again?</h3>
+        </div>
+        <p id="weather-loading">Looking up the weather&hellip;</p>
 
         <h1>Get Weather Conditions</h1>
-        <form action="/weather"> 
+        <form action="/weather">
             <input type="text" name="city" id="city" placeholder="Enter a City" />
             <button class="btn" type="submit">Submit</button>
         </form>
     </div>
 </section>
-<script src="{{ url_for('static', filename='scripts/script.js') }}"></script>
+<script src="{{ url_for('static', filename='scripts/weather.js') }}"></script>
 
 {% endblock %}
-
-
-</html>
