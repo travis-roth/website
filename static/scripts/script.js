@@ -1,5 +1,6 @@
 window.addEventListener('scroll', function() {
     var header = document.getElementById('hero-name');
+    if (!header) return;
     var scrollPosition = window.scrollY;
     var maxScroll = document.body.clientHeight - window.innerHeight -2200;
     var percentageScrolled = scrollPosition / maxScroll;
@@ -23,28 +24,6 @@ function colorTransition(startColor, endColor, percentage) {
     }
     return result;
 }
-
-document.addEventListener("DOMContentLoaded", function() {
-    const weatherSection = document.querySelector('.weather');
-    const weatherStatus = weatherSection.dataset.status;
-
-    const rainAnimation = document.querySelector('.rain');
-    const sunAnimation = document.querySelector('.sun');
-    const cloudsAnimation = document.querySelector('.clouds');
-
-    rainAnimation.style.display = 'none';
-    sunAnimation.style.display = 'none';
-    cloudsAnimation.style.display = 'none';
-
-    if (weatherStatus.toLowerCase().includes('rain')) {
-        rainAnimation.style.display = 'block';
-    } else if (weatherStatus.toLowerCase().includes('clear')) {
-        sunAnimation.style.display = 'block';
-    } else if (weatherStatus.toLowerCase().includes('clouds')) {
-        cloudsAnimation.style.display = 'block';
-    }
-
-});
 
 $(document).ready(function() {
     $('.burger-menu').click(function() {
