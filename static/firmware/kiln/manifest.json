@@ -1,0 +1,5 @@
+{
+  "version": "2.0.0",
+  "url": "https://travisroth.dev/static/firmware/kiln/kiln_monitor-2.0.0.bin",
+  "notes": "Hotspot fallback, MQTT last-will status, OTA updates, 15 s publish interval."
+}
