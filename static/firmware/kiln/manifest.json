@@ -1,5 +1,5 @@
 {
-  "version": "2.1.0",
-  "url": "https://travisroth.dev/static/firmware/kiln/kiln_monitor-2.1.0.bin",
-  "notes": "Heartbeat reports thermocouple fault state (open / short / no_response) and cold-junction temperature."
+  "version": "2.2.0",
+  "url": "https://travisroth.dev/static/firmware/kiln/kiln_monitor-2.2.0.bin",
+  "notes": "I2C LCD 1602 support (SDA 21, SCL 22): live temperature in C/F, heating/cooling rate, Wi-Fi and probe status."
 }
