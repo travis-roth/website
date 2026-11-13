@@ -216,11 +216,13 @@ section.projects a {
 }
 
 @keyframes run-across {
+    /* Start just off the left edge and exit at the right edge: on screen
+       ~83% of each lap instead of 25%. */
     from {
-        transform: translateX(-300vw);
+        transform: translateX(-20vw);
     }
     to {
-        transform: translateX(calc(100vw - 100px));
+        transform: translateX(100vw);
     }
 }
 
@@ -231,7 +233,7 @@ section.projects a {
     position: absolute; 
     top: -50%; 
     left: 0; 
-    animation: run-across 8s linear infinite; 
+    animation: run-across 14s linear infinite; 
 }
 
 @keyframes rise {
