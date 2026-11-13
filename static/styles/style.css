@@ -225,7 +225,9 @@ section.projects a {
 }
 
 #footballgif {
-    max-width: 30rem;
+    width: 8rem;              /* source is 65x90, transparent; ~2x keeps it visible */
+    max-width: none;
+    image-rendering: auto;
     position: absolute; 
     top: -50%; 
     left: 0; 
